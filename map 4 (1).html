@@ -1,0 +1,2717 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Income Tax Calculator (AY 2024-25) | Pro</title>
+    <meta name="description" content="Comprehensive Indian Income Tax Calculator for AY 2024-25. Calculate tax under Old and New Regimes, explore deductions, get optimization tips, visualize results, and download a PDF report. Features dual themes and professional animations.">
+    <meta name="keywords" content="income tax calculator, india, ay 2024-25, fy 2023-24, old regime, new regime, tax calculation, deductions, 80c, 80d, hra, tax saving, tax optimization, pdf report, dark theme, finance, tool">
+
+    <!-- Favicon (Simple Emoji) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Libraries via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+
+    <style>
+        /* ============================== */
+        /* == CSS (Themes, Layout, Anim) == */
+        /* ============================== */
+
+        /* CSS Reset and Base Styles */
+        :root {
+            /* Light Theme Variables */
+            --bg-color-light: #f8f9fa;
+            --text-color-light: #212529;
+            --primary-color-light: #007bff;
+            --secondary-color-light: #6c757d;
+            --card-bg-light: #ffffff;
+            --border-color-light: #dee2e6;
+            --input-bg-light: #ffffff;
+            --input-border-light: #ced4da;
+            --success-color-light: #28a745;
+            --error-color-light: #dc3545;
+            --info-color-light: #17a2b8;
+            --warning-color-light: #ffc107;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --highlight-bg-light: #e9ecef;
+            /* RGB versions for RGBA compatibility in box-shadows etc. */
+            --primary-color-rgb-light: 0, 123, 255;
+            --error-color-rgb-light: 220, 53, 69;
+            --success-color-rgb-light: 40, 167, 69;
+            --info-color-rgb-light: 23, 162, 184;
+            --warning-color-rgb-light: 255, 193, 7;
+
+
+            /* Dark Theme Variables */
+            --bg-color-dark: #1a1a1a;
+            --text-color-dark: #e8e8e8; /* Slightly lighter grey */
+            --primary-color-dark: #4dabf7; /* Brighter blue */
+            --secondary-color-dark: #adb5bd;
+            --card-bg-dark: #2c2c2c;
+            --border-color-dark: #4a4a4a; /* Darker border */
+            --input-bg-dark: #333;
+            --input-border-dark: #555;
+            --success-color-dark: #20c997; /* Tealish green */
+            --error-color-dark: #f76e79; /* Lighter red */
+            --info-color-dark: #3bc9db; /* Lighter cyan */
+            --warning-color-dark: #ffd43b; /* Brighter yellow */
+            --shadow-dark: 0 5px 20px rgba(0, 0, 0, 0.3);
+            --highlight-bg-dark: #3a3a3a;
+            /* RGB versions for dark */
+            --primary-color-rgb-dark: 77, 171, 247;
+            --error-color-rgb-dark: 247, 110, 121;
+            --success-color-rgb-dark: 32, 201, 151;
+            --info-color-rgb-dark: 59, 201, 219;
+            --warning-color-rgb-dark: 255, 212, 59;
+
+            /* Applied Variables (Default to Light) */
+            --bg-color: var(--bg-color-light);
+            --text-color: var(--text-color-light);
+            --primary-color: var(--primary-color-light);
+            --secondary-color: var(--secondary-color-light);
+            --card-bg: var(--card-bg-light);
+            --border-color: var(--border-color-light);
+            --input-bg: var(--input-bg-light);
+            --input-border: var(--input-border-light);
+            --success-color: var(--success-color-light);
+            --error-color: var(--error-color-light);
+            --info-color: var(--info-color-light);
+            --warning-color: var(--warning-color-light);
+            --shadow: var(--shadow-light);
+            --highlight-bg: var(--highlight-bg-light);
+            --primary-color-rgb: var(--primary-color-rgb-light);
+            --error-color-rgb: var(--error-color-rgb-light);
+            --success-color-rgb: var(--success-color-rgb-light);
+            --info-color-rgb: var(--info-color-rgb-light);
+            --warning-color-rgb: var(--warning-color-rgb-light);
+
+
+            --font-family: 'Poppins', sans-serif;
+            --transition-speed: 0.3s;
+            --animation-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .dark-mode {
+            --bg-color: var(--bg-color-dark);
+            --text-color: var(--text-color-dark);
+            --primary-color: var(--primary-color-dark);
+            --secondary-color: var(--secondary-color-dark);
+            --card-bg: var(--card-bg-dark);
+            --border-color: var(--border-color-dark);
+            --input-bg: var(--input-bg-dark);
+            --input-border: var(--input-border-dark);
+            --success-color: var(--success-color-dark);
+            --error-color: var(--error-color-dark);
+            --info-color: var(--info-color-dark);
+            --warning-color: var(--warning-color-dark);
+            --shadow: var(--shadow-dark);
+            --highlight-bg: var(--highlight-bg-dark);
+            --primary-color-rgb: var(--primary-color-rgb-dark);
+            --error-color-rgb: var(--error-color-rgb-dark);
+            --success-color-rgb: var(--success-color-rgb-dark);
+            --info-color-rgb: var(--info-color-rgb-dark);
+            --warning-color-rgb: var(--warning-color-rgb-dark);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px; /* Base font size */
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1280px; /* Slightly wider for larger screens */
+            margin: 2rem auto;
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem; /* Increased margin */
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: border-color var(--transition-speed) ease;
+        }
+
+        header h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font size */
+            font-weight: 700; /* Bolder */
+            color: var(--primary-color);
+            transition: color var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        header h1 .fa-calculator {
+            font-size: 0.9em;
+        }
+        header h1 small {
+            font-size: 0.5em;
+            color: var(--secondary-color);
+            font-weight: 400;
+            margin-left: 5px;
+             transition: color var(--transition-speed) ease;
+        }
+
+        /* Theme Toggle */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .theme-switch {
+            display: inline-block;
+            height: 30px; /* Slightly larger */
+            position: relative;
+            width: 60px; /* Slightly wider */
+            margin-left: 12px;
+        }
+        .theme-switch input { display:none; }
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s var(--animation-ease);
+            border-radius: 30px;
+        }
+        .slider:before { /* The switch handle */
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 22px;
+            left: 4px;
+            position: absolute;
+            transition: .4s var(--animation-ease);
+            width: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #777; /* Default icon color */
+        }
+        /* Icons inside the slider */
+         .slider::after { /* Icon shown when UNCHECKED (light mode) */
+             content: '☀️';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+             font-size: 14px;
+             color: #f0ad4e;
+             opacity: 1;
+             transition: opacity 0.4s ease;
+             z-index: 0;
+         }
+        .dark-mode .slider::after { opacity: 0; }
+
+        /* Position Moon icon inside handle */
+        input:checked + .slider:before {
+             content: '🌙';
+             transform: translateX(30px); /* Moves handle to the right */
+             color: var(--primary-color-dark); /* Icon color in dark */
+             background-color: transparent; /* Handle bg not needed with icon */
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+         .dark-mode .slider:before { /* Handle appearance in dark mode (unchecked) */
+            background-color: #ddd; /* Light handle on dark track */
+             color: #555;
+        }
+        .dark-mode input:checked + .slider:before { /* Moon handle in dark mode (checked) */
+            color: var(--primary-color-dark); /* Adjust color */
+             background-color: #e0e0e0; /* Slightly diff handle background for contrast */
+        }
+
+
+        .theme-switch-wrapper span {
+            font-size: 0.9rem;
+            margin-right: 8px;
+            color: var(--secondary-color);
+            transition: color var(--transition-speed) ease;
+        }
+
+        /* Main Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to single column */
+            gap: 2rem;
+        }
+        /* Create two columns for wider screens */
+        @media (min-width: 992px) {
+            .main-grid {
+                 /* Left column slightly larger */
+                grid-template-columns: 1.2fr 1fr;
+             }
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px; /* Smoother corners */
+            padding: clamp(1rem, 5vw, 1.8rem); /* Responsive padding */
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: background-color var(--transition-speed) ease,
+                        border-color var(--transition-speed) ease,
+                        box-shadow var(--transition-speed) ease;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .card h2 {
+            font-size: clamp(1.2rem, 4vw, 1.4rem);
+            margin-bottom: 1.8rem; /* More spacing */
+            font-weight: 600;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            transition: color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+         .card h2 .fas {
+             font-size: 0.9em;
+             opacity: 0.8;
+         }
+        #results-section h2 .fa-chart-line {
+            color: var(--success-color);
+         }
+
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem; /* Increased spacing */
+            opacity: 0;
+            transform: translateX(-15px);
+            position: relative; /* For error message positioning */
+        }
+
+        .form-group label {
+            display: flex; /* Use flex for alignment */
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.6rem; /* Increased spacing */
+            font-weight: 500;
+            font-size: 0.98rem;
+        }
+        .form-group label .fa-info-circle {
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: color 0.2s ease;
+        }
+         .form-group label .fa-info-circle:hover {
+            color: var(--primary-color);
+        }
+
+        /* Tooltip Styles (Simple CSS Tooltip) */
+        [data-tooltip] {
+            position: relative;
+        }
+        [data-tooltip]::after {
+             content: attr(data-tooltip);
+             position: absolute;
+            left: 50%;
+             transform: translateX(-50%) translateY(-5px); /* Start slightly offset for transition */
+            bottom: 130%; /* Position above */
+            background-color: #333;
+            color: #fff;
+             padding: 6px 12px; /* Better padding */
+             border-radius: 5px;
+            font-size: 0.88rem;
+             line-height: 1.4; /* Ensure readability */
+             font-weight: 400; /* Lighter weight */
+             white-space: nowrap;
+             opacity: 0;
+             visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 100; /* Ensure on top */
+             pointer-events: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+         /* Tooltip Arrow */
+        [data-tooltip]::before {
+             content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+             bottom: 130%;
+            margin-bottom: -5px;
+             border-width: 5px;
+             border-style: solid;
+            border-color: #333 transparent transparent transparent;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 100;
+             pointer-events: none;
+        }
+        [data-tooltip]:hover::after,
+        [data-tooltip]:hover::before {
+             opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0); /* Move into final position */
+        }
+         /* Dark mode tooltips */
+        .dark-mode [data-tooltip]::after { background-color: #eee; color: #333; }
+         .dark-mode [data-tooltip]::before { border-top-color: #eee; }
+
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem; /* Comfortable padding */
+            border: 1px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            transition: border-color var(--transition-speed) ease,
+                        background-color var(--transition-speed) ease,
+                        color var(--transition-speed) ease,
+                        box-shadow 0.2s ease;
+            /* Remove default browser arrows for number input */
+            -moz-appearance: textfield;
+        }
+        .form-group input[type="number"]::-webkit-outer-spin-button,
+        .form-group input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .form-group input[type="number"]:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+             box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2); /* Subtle focus ring */
+        }
+         /* Style for disabled inputs */
+        .form-group input:disabled, .form-group select:disabled {
+            background-color: var(--highlight-bg) !important; /* Use important to override default */
+             opacity: 0.7;
+             cursor: not-allowed;
+             border-color: var(--border-color) !important; /* Ensure consistent border */
+        }
+
+
+        /* Input error state */
+        .form-group input.error-input, .form-group select.error-input {
+             border-color: var(--error-color) !important; /* Ensure override */
+        }
+         .form-group input.error-input:focus, .form-group select.error-input:focus {
+             box-shadow: 0 0 0 3px rgba(var(--error-color-rgb), 0.25) !important;
+         }
+
+        .error-message {
+             color: var(--error-color);
+            font-size: 0.85rem;
+             margin-top: 0.4rem;
+             min-height: 1.2em; /* Reserve space */
+             opacity: 0;
+             transition: opacity var(--transition-speed) ease;
+             position: absolute; /* Position below input */
+             bottom: -1.5em; /* Adjust position to prevent overlap */
+             left: 0;
+             width: 100%; /* Ensure it takes full width */
+        }
+        .error-message.visible { opacity: 1; }
+
+
+        /* Regime Toggle */
+        .regime-toggle-wrapper { margin-bottom: 2rem; }
+        .regime-toggle {
+            display: flex;
+            background-color: var(--highlight-bg);
+            border-radius: 30px;
+            padding: 6px;
+            position: relative;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+        .regime-toggle label {
+             flex: 1;
+            text-align: center;
+             padding: 0.7rem 1.2rem; /* Better padding */
+             cursor: pointer;
+             z-index: 1;
+            position: relative;
+            font-weight: 500;
+            font-size: 0.95rem;
+             transition: color 0.4s ease;
+            margin-bottom: 0; /* Override general label style */
+             border-radius: 25px; /* Individual label radius for hover effect */
+        }
+        .regime-toggle input[type="radio"] { display: none; }
+        .regime-slider {
+            position: absolute;
+            top: 6px; /* Match padding */
+             bottom: 6px;
+             width: calc(50% - 6px); /* Match padding */
+             background-color: var(--primary-color);
+            border-radius: 25px;
+             transition: transform 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), background-color var(--transition-speed) ease; /* Bounce + Color */
+            z-index: 0;
+             left: 6px;
+         }
+         #regime-new:checked ~ .regime-slider { transform: translateX(0%); }
+        #regime-old:checked ~ .regime-slider { transform: translateX(calc(100% + 0px)); } /* Adjusted slightly if needed */
+
+        /* Text color changes on check */
+         #regime-new:checked ~ label[for="regime-new"],
+        #regime-old:checked ~ label[for="regime-old"] {
+            color: white;
+            font-weight: 600;
+        }
+        /* Hover effect on non-selected label */
+        #regime-new:not(:checked) ~ label[for="regime-new"]:hover,
+        #regime-old:not(:checked) ~ label[for="regime-old"]:hover {
+             background-color: rgba(var(--primary-color-rgb), 0.1); /* Subtle background hover */
+         }
+
+        /* Deductions Section */
+        #deductions-wrapper {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border-color);
+            transition: border-color var(--transition-speed) ease;
+            position: relative; /* Needed for potential overlay/disabled effect */
+        }
+         #deductions-section h3 {
+             font-size: 1.2rem;
+             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative; /* For note positioning */
+         }
+         #deduction-regime-note {
+            font-size: 0.8em;
+            color: var(--secondary-color);
+            font-weight: 400;
+            margin-left: auto; /* Push note to the right */
+            transition: color var(--transition-speed) ease;
+            text-align: right;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+         }
+         .deduction-group {
+            transition: opacity 0.3s ease;
+         }
+         .deduction-group.disabled {
+             opacity: 0.5;
+             pointer-events: none; /* Prevent interaction */
+         }
+
+
+         /* HRA Specifics */
+         #fg-hra { transition: opacity 0.4s ease, max-height 0.4s ease; overflow: hidden; }
+         .hra-inputs {
+             max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-in-out, opacity 0.5s ease, margin-top 0.5s ease, padding 0.5s ease;
+             opacity: 0;
+             margin-top: 0;
+             padding-left: 1.2rem;
+             margin-left: -1.2rem; /* Pull back to align with other inputs visually */
+             border-left: 3px solid var(--info-color);
+             background-color: rgba(var(--info-color-rgb), 0.05);
+             border-radius: 0 8px 8px 0;
+             padding-top: 0;
+             padding-bottom: 0;
+         }
+        .hra-inputs.visible {
+            max-height: 600px; /* Ample height */
+             opacity: 1;
+             margin-top: 1rem;
+            padding-top: 1rem;
+             padding-bottom: 0.5rem;
+         }
+         .hra-inputs > p {
+            font-size: 1rem;
+            font-weight: 600;
+             margin-bottom: 1rem;
+             color: var(--info-color);
+             padding-left: 1.2rem; /* Indent title */
+         }
+         .hra-inputs .form-group {
+            margin-left: 1.2rem; /* Indent HRA fields */
+            margin-right: 0.5rem; /* Add some right padding */
+         }
+
+
+        /* Results Section */
+        #results-output { margin-top: 1rem; }
+        #initial-message {
+            padding: 2rem 1rem;
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+             border: 2px dashed var(--border-color);
+             border-radius: 8px;
+            background-color: var(--highlight-bg);
+             transition: all var(--transition-speed) ease;
+        }
+        .results-summary {
+             display: grid;
+             /* Responsive grid: 1 column on small, 2 on medium+ */
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+             gap: 1.2rem;
+            margin-bottom: 2rem;
+             opacity: 0;
+             transform: translateY(10px);
+        }
+        .summary-item {
+             background-color: var(--highlight-bg);
+             padding: 1.2rem;
+             border-radius: 8px;
+             border-left: 5px solid var(--primary-color);
+             transition: all var(--transition-speed) ease;
+             opacity: 0;
+             transform: scale(0.9);
+            position: relative;
+            overflow: hidden;
+         }
+        .summary-item:hover {
+             transform: translateY(-3px) scale(1.01); /* Subtle hover lift */
+             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+         }
+        .dark-mode .summary-item:hover { box-shadow: 0 6px 12px rgba(0,0,0,0.25); }
+
+         /* Color coding borders */
+        .summary-item.taxable-income-item { border-left-color: var(--warning-color); }
+        .summary-item.tax-payable-item { border-left-color: var(--error-color); }
+        .summary-item.take-home-item { border-left-color: var(--success-color); }
+
+        .summary-item p {
+             font-size: 0.9rem;
+             color: var(--secondary-color);
+             margin-bottom: 0.4rem;
+             transition: color var(--transition-speed) ease;
+             font-weight: 500;
+         }
+        .summary-item span {
+             font-size: clamp(1.3rem, 4vw, 1.6rem); /* Responsive font size */
+            font-weight: 700; /* Bolder values */
+            display: block;
+            color: var(--text-color);
+            transition: color var(--transition-speed) ease;
+            word-break: break-all; /* Prevent long numbers overflowing */
+         }
+         .result-value { display: inline-block; } /* For GSAP counter target */
+
+
+         /* Breakdown Table */
+        .breakdown-container h3 {
+             font-size: 1.2rem;
+            margin-bottom: 1rem;
+             padding-top: 1.5rem;
+             border-top: 1px dashed var(--border-color);
+             transition: border-color var(--transition-speed) ease;
+         }
+        .breakdown-table {
+             width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+         }
+        .breakdown-table th, .breakdown-table td {
+            text-align: left;
+            padding: 0.8rem 0.6rem;
+             border-bottom: 1px solid var(--border-color);
+             font-size: 0.95rem;
+             transition: all var(--transition-speed) ease;
+            opacity: 0;
+            transform: translateX(-10px);
+            vertical-align: middle;
+         }
+        .breakdown-table th {
+            font-weight: 500; /* Slightly less bold headers */
+             color: var(--secondary-color);
+             width: 65%; /* Give more space to description */
+         }
+        .breakdown-table tr:last-child th,
+        .breakdown-table tr:last-child td { border-bottom: none; }
+
+        .breakdown-table td {
+            font-weight: 600; /* Bold values */
+            text-align: right;
+             color: var(--text-color); /* Ensure contrast */
+        }
+        /* Highlight key rows */
+        .breakdown-table tr.highlight-row th,
+         .breakdown-table tr.highlight-row td {
+             font-weight: 600;
+            background-color: var(--highlight-bg);
+        }
+         .breakdown-table tr.total-tax-row td {
+             color: var(--error-color); /* Highlight final tax */
+             font-size: 1.05em; /* Make slightly larger */
+         }
+        .breakdown-table tr.zero-value td {
+             color: var(--secondary-color); /* Dim zero values */
+             font-weight: 400;
+        }
+
+        /* Comparison Note & Suggestions */
+        .comparison-note, .optimization-suggestions {
+            margin-top: 1.8rem;
+            padding: 1.2rem;
+            background-color: var(--highlight-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--info-color);
+            transition: all var(--transition-speed) ease;
+            opacity: 0;
+            transform: scale(0.95);
+         }
+        .optimization-suggestions { border-left-color: var(--warning-color); }
+
+        .comparison-note h3, .optimization-suggestions h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+             display: flex;
+             align-items: center;
+            gap: 8px;
+            color: var(--info-color);
+        }
+        .optimization-suggestions h3 { color: var(--warning-color); }
+        .optimization-suggestions h3 .fa-lightbulb { color: var(--warning-color); }
+
+        .optimization-suggestions ul {
+            list-style: none;
+            padding-left: 0;
+         }
+         .optimization-suggestions li {
+            margin-bottom: 0.7rem; /* More space */
+            padding-left: 1.8rem;
+            position: relative;
+            font-size: 0.98rem;
+            line-height: 1.5;
+             opacity: 0;
+             transform: translateX(-10px);
+         }
+         /* Custom bullet using FontAwesome check or info */
+        .optimization-suggestions li::before {
+             font-family: 'Font Awesome 6 Free';
+             font-weight: 900;
+             position: absolute;
+             left: 0;
+             top: 4px; /* Adjust alignment */
+             width: 1em; /* Ensure spacing */
+             text-align: center;
+             transition: color var(--transition-speed) ease;
+        }
+         .optimization-suggestions li.suggestion-good::before {
+            content: "\f058"; /* Check circle */
+            color: var(--success-color);
+         }
+         .optimization-suggestions li.suggestion-info::before {
+             content: "\f05a"; /* Info circle */
+             color: var(--info-color);
+         }
+        .optimization-suggestions li strong { color: var(--primary-color); font-weight: 600;}
+         .optimization-suggestions .placeholder-suggestion::before { content: "\f128"; /* Question Circle */ color: var(--secondary-color); }
+
+
+        /* Charts */
+        .charts-container {
+            display: grid;
+            /* Responsive grid */
+             grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); /* Ensures charts don't get too wide on large screens */
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+             opacity: 0;
+             transform: translateY(20px);
+        }
+        .chart-wrapper {
+            background: var(--card-bg);
+            padding: 1.2rem;
+             border-radius: 8px;
+             box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+             transition: all var(--transition-speed) ease;
+            opacity: 0;
+            transform: scale(0.9);
+            min-height: 300px; /* Ensure charts have some height */
+             display: flex;
+            flex-direction: column;
+        }
+         .chart-wrapper h4 {
+            text-align: center;
+             margin-bottom: 1rem;
+            font-weight: 500;
+             font-size: 1rem;
+            color: var(--secondary-color);
+            transition: color var(--transition-speed) ease;
+            flex-shrink: 0; /* Prevent header from shrinking */
+         }
+        .chart-wrapper canvas {
+            max-width: 100%;
+            height: auto !important;
+             flex-grow: 1; /* Allow canvas to fill remaining space */
+         }
+
+        /* Download Button */
+        .download-button-container {
+            text-align: center;
+             margin-top: 2.5rem;
+             opacity: 0;
+             transform: translateY(20px);
+        }
+        .btn-download {
+            background-color: var(--success-color);
+             color: white;
+             border: none;
+            padding: 0.9rem 2rem; /* Larger button */
+             font-size: 1.1rem;
+             font-weight: 600; /* Bold text */
+            border-radius: 30px; /* Pill shape */
+            cursor: pointer;
+             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+            display: inline-flex;
+             align-items: center;
+             gap: 10px;
+             box-shadow: 0 4px 12px rgba(var(--success-color-rgb), 0.3);
+             text-decoration: none; /* Remove underline if used as <a> */
+         }
+        .btn-download:hover:not(:disabled) {
+             background-color: #218838; /* Darker success */
+             .dark-mode & { background-color: #1a9850; } /* Dark mode darker */
+            transform: translateY(-3px);
+             box-shadow: 0 7px 15px rgba(var(--success-color-rgb), 0.4);
+         }
+        .btn-download:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(var(--success-color-rgb), 0.3);
+        }
+        .btn-download:disabled {
+             background-color: var(--secondary-color);
+            cursor: not-allowed;
+             opacity: 0.6;
+             box-shadow: none;
+             transform: none;
+        }
+         .btn-download .fa-spinner {
+             animation: fa-spin 1.5s linear infinite;
+         }
+         @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+         }
+
+        /* Footer */
+        footer {
+             text-align: center;
+             margin-top: 4rem; /* More space */
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+             color: var(--secondary-color);
+            border-top: 1px solid var(--border-color);
+            transition: color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            opacity: 0;
+             transform: translateY(20px);
+        }
+        footer p { margin-bottom: 0.5rem; }
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+             font-weight: 500;
+             transition: color var(--transition-speed) ease;
+         }
+         footer a:hover {
+             text-decoration: underline;
+             color: #0056b3; /* Slightly darker blue on hover */
+            .dark-mode & { color: #69b7f7; } /* Lighter blue */
+        }
+        footer .fa-heart { color: var(--error-color); }
+        .disclaimer {
+            font-size: 0.85rem;
+             margin-top: 0.8rem;
+             font-style: italic;
+            max-width: 700px;
+             margin-left: auto;
+             margin-right: auto;
+         }
+
+        /* Responsiveness Adjustments */
+        @media (max-width: 991px) { /* Adjust breakpoint where grid switches */
+             .main-grid {
+                 grid-template-columns: 1fr; /* Stack columns earlier */
+            }
+             .container {
+                 width: 95%;
+            }
+            header h1 {
+                font-size: clamp(1.4rem, 5vw, 1.8rem);
+            }
+             #deductions-section h3 { flex-wrap: wrap; } /* Allow title and note to wrap */
+             #deduction-regime-note { position: static; transform: none; margin-left: 0; text-align: left; flex-basis: 100%; }
+        }
+
+         @media (max-width: 768px) {
+            html { font-size: 15px; }
+             header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+             }
+             .theme-switch-wrapper {
+                 align-self: flex-end; /* Align toggle right */
+            }
+             .results-summary {
+                 grid-template-columns: 1fr; /* Stack summary items earlier */
+            }
+            .breakdown-table th, .breakdown-table td {
+                padding: 0.7rem 0.4rem;
+                 font-size: 0.92rem;
+            }
+             .breakdown-table th { width: 60%; } /* Adjust width */
+            .summary-item span {
+                font-size: clamp(1.2rem, 4vw, 1.5rem);
+            }
+            .btn-download {
+                 font-size: 1rem;
+                 padding: 0.8rem 1.6rem;
+             }
+         }
+
+         @media (max-width: 480px) {
+             html { font-size: 14px; } /* Reduce base further */
+            .container {
+                padding: 1rem 0.8rem; /* Less horizontal padding */
+            }
+             header h1 {
+                 font-size: clamp(1.2rem, 6vw, 1.5rem);
+            }
+            .card { padding: clamp(0.8rem, 4vw, 1.2rem); }
+             .form-group input, .form-group select {
+                 padding: 0.7rem 0.9rem;
+             }
+             .regime-toggle label {
+                font-size: 0.9rem;
+                 padding: 0.6rem 1rem;
+             }
+             .charts-container {
+                 gap: 1rem;
+            }
+             .chart-wrapper { padding: 1rem; min-height: 250px; }
+            .breakdown-table th { width: 55%; } /* Further adjust width */
+             footer { margin-top: 3rem; font-size: 0.85rem; }
+         }
+
+        /* Accessibility: Focus styles */
+         a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+             outline: 3px solid var(--primary-color);
+             outline-offset: 2px;
+            box-shadow: 0 0 0 4px rgba(var(--primary-color-rgb), 0.3);
+            border-radius: 4px; /* Ensure focus outline matches shape */
+        }
+         /* Specific focus for custom elements */
+         .theme-switch input:focus-visible + .slider {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 4px rgba(var(--primary-color-rgb), 0.3);
+         }
+
+
+        /* Reduced Motion Preferences */
+        @media (prefers-reduced-motion: reduce) {
+             *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                 scroll-behavior: auto !important;
+                 /* Force GSAP to minimal/no animation */
+                 /* GSAP usually respects this, but setting duration low helps */
+             }
+             .regime-slider { transition: none !important; } /* Disable specific transitions */
+            .result-value { transition: none !important; }
+             /* Disable GSAP globally if preferred */
+             /* gsap.globalTimeline.timeScale(0.1); // Or even 0 */
+        }
+
+        /* Utility Classes */
+         .hidden { display: none !important; } /* Use important to override inline styles if needed */
+        .visually-hidden { /* Better than sr-only for modern accessibility */
+            position: absolute !important;
+            height: 1px; width: 1px;
+             overflow: hidden;
+             clip: rect(1px, 1px, 1px, 1px);
+             white-space: nowrap; /* added line */
+         }
+         .text-center { text-align: center; }
+         .mt-1 { margin-top: 0.5rem; }
+         .mt-2 { margin-top: 1rem; }
+         .mb-1 { margin-bottom: 0.5rem; }
+         .mb-2 { margin-bottom: 1rem; }
+         .mt-3 { margin-top: 1.5rem; }
+         .mb-3 { margin-bottom: 1.5rem; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header id="main-header">
+            <h1>
+                <i class="fas fa-calculator"></i> Pro Indian Tax Calculator
+                <small>(AY 2024-25)</small>
+            </h1>
+            <div class="theme-switch-wrapper">
+                <span id="theme-label" aria-hidden="true">Light Mode</span>
+                <label class="theme-switch" for="theme-toggle-checkbox">
+                    <input type="checkbox" id="theme-toggle-checkbox" class="visually-hidden" aria-label="Toggle theme">
+                    <div class="slider"></div>
+                </label>
+            </div>
+        </header>
+
+        <main class="main-grid">
+            <!-- Input Section Column -->
+            <section class="card" id="input-card">
+                <h2><i class="fas fa-edit"></i> Enter Your Financial Details</h2>
+
+                <form id="tax-form" novalidate> <!-- Use novalidate to handle validation via JS -->
+                    <!-- Regime Selection -->
+                    <div class="form-group regime-toggle-wrapper">
+                        <label class="text-center mb-1" id="regime-label">Choose Tax Regime:</label>
+                        <div class="regime-toggle" role="radiogroup" aria-labelledby="regime-label">
+                             <!-- New is first, visually matches left -->
+                            <input type="radio" id="regime-new" name="taxRegime" value="new" checked>
+                            <input type="radio" id="regime-old" name="taxRegime" value="old">
+
+                            <label for="regime-new" id="label-regime-new">New Regime (Default)</label>
+                            <label for="regime-old" id="label-regime-old">Old Regime</label>
+                            <div class="regime-slider" aria-hidden="true"></div>
+                        </div>
+                    </div>
+
+                     <!-- Income Details -->
+                    <div class="form-group income-group" id="fg-gross-salary">
+                         <label for="gross-salary">
+                            Gross Salary Income
+                            <i class="fas fa-info-circle" data-tooltip="Total salary before any deductions like PF, Prof. Tax etc. Required."></i>
+                         </label>
+                         <input type="number" id="gross-salary" placeholder="e.g., 1200000" min="0" step="1000" required aria-required="true">
+                         <div class="error-message" id="gross-salary-error" role="alert"></div>
+                    </div>
+
+                     <div class="form-group income-group" id="fg-other-income">
+                        <label for="other-income">
+                            Income from Other Sources
+                            <i class="fas fa-info-circle" data-tooltip="e.g., Interest, Dividends, Rental income (net of std deduction), Capital Gains etc. Enter 0 if none."></i>
+                         </label>
+                         <input type="number" id="other-income" placeholder="e.g., 50000" min="0" step="1000" value="0">
+                        <div class="error-message" id="other-income-error" role="alert"></div>
+                    </div>
+
+                    <!-- Deductions Section (Structure always present, controlled by JS/CSS) -->
+                     <div id="deductions-wrapper">
+                        <div id="deductions-section">
+                             <h3>
+                                <i class="fas fa-wallet"></i> Deductions & Exemptions
+                                <span id="deduction-regime-note"></span>
+                            </h3>
+
+                             <!-- HRA Claim Option -->
+                             <div class="form-group deduction-group" id="fg-hra">
+                                <label for="claim-hra">
+                                    Claim HRA Exemption?
+                                     <i class="fas fa-info-circle" data-tooltip="HRA Exemption is available ONLY under the Old Regime. Select 'Yes' and fill details below if applicable."></i>
+                                 </label>
+                                 <select id="claim-hra" disabled> {/* Initially disabled, enabled by JS if Old Regime */ }
+                                    <option value="no" selected>No</option>
+                                    <option value="yes">Yes (Requires Old Regime)</option>
+                                </select>
+                             </div>
+
+                            <!-- HRA Detailed Inputs (Conditionally visible via CSS class) -->
+                            <div class="hra-inputs" id="hra-details">
+                                 <p><i class="fas fa-home"></i> HRA Details (Annual Figures):</p>
+                                 <div class="form-group" id="fg-basic-salary-hra">
+                                    <label for="basic-salary-hra">Basic Salary (for HRA calc)
+                                         <i class="fas fa-info-circle" data-tooltip="Usually Basic + DA. Check your salary structure. Required if claiming HRA under Old Regime."></i>
+                                    </label>
+                                    <input type="number" id="basic-salary-hra" placeholder="e.g., 600000" min="0" step="1000" required>
+                                    <div class="error-message" id="basic-salary-hra-error" role="alert"></div>
+                                 </div>
+                                 <div class="form-group" id="fg-hra-received">
+                                     <label for="hra-received">HRA Received
+                                         <i class="fas fa-info-circle" data-tooltip="Total HRA component in your salary. Required if claiming HRA under Old Regime."></i>
+                                     </label>
+                                    <input type="number" id="hra-received" placeholder="e.g., 240000" min="0" step="1000" required>
+                                    <div class="error-message" id="hra-received-error" role="alert"></div>
+                                 </div>
+                                 <div class="form-group" id="fg-rent-paid">
+                                     <label for="rent-paid">Total Rent Paid
+                                        <i class="fas fa-info-circle" data-tooltip="Required if claiming HRA under Old Regime."></i>
+                                    </label>
+                                    <input type="number" id="rent-paid" placeholder="e.g., 300000" min="0" step="1000" required>
+                                    <div class="error-message" id="rent-paid-error" role="alert"></div>
+                                 </div>
+                                <div class="form-group" id="fg-metro-city">
+                                    <label for="metro-city">Living in Metro City?</label>
+                                    <select id="metro-city">
+                                        <option value="yes">Yes (Mumbai, Delhi, Chennai, Kolkata)</option>
+                                        <option value="no" selected>No</option>
+                                    </select>
+                                 </div>
+                            </div>
+
+                             <!-- Other Deductions (Only applicable in Old Regime - controlled via JS/CSS) -->
+                            <div class="form-group deduction-group" id="fg-80c">
+                                <label for="deduction-80c">Section 80C
+                                    <i class="fas fa-info-circle" data-tooltip="EPF, PPF, ELSS, Life Ins. Premium, Home Loan Principal, etc. Max: ₹1,50,000 (Old Regime Only)"></i>
+                                </label>
+                                <input type="number" id="deduction-80c" placeholder="Max 1,50,000" min="0" max="150000" step="1000" value="0" disabled>
+                                <div class="error-message" id="deduction-80c-error" role="alert"></div>
+                            </div>
+
+                             <div class="form-group deduction-group" id="fg-80d">
+                                <label for="deduction-80d">Section 80D (Health Insurance)
+                                    <i class="fas fa-info-circle" data-tooltip="Self/Family (max ₹25k or ₹50k if senior citizen) + Parents (additional max ₹25k or ₹50k if senior). Enter total eligible. (Old Regime Only)"></i>
+                                </label>
+                                <input type="number" id="deduction-80d" placeholder="Max depends on age" min="0" step="500" value="0" disabled>
+                                 <div class="error-message" id="deduction-80d-error" role="alert"></div>
+                             </div>
+
+                            <div class="form-group deduction-group" id="fg-80e">
+                                <label for="deduction-80e">Section 80E (Edu Loan Interest)
+                                     <i class="fas fa-info-circle" data-tooltip="Interest paid on loan for higher education. No max limit on interest amount. (Old Regime Only)"></i>
+                                </label>
+                                <input type="number" id="deduction-80e" placeholder="Enter total interest paid" min="0" step="1000" value="0" disabled>
+                                <div class="error-message" id="deduction-80e-error" role="alert"></div>
+                            </div>
+
+                            <div class="form-group deduction-group" id="fg-nps-80ccd1b">
+                                 <label for="deduction-nps-80ccd1b">Sec 80CCD(1B) (NPS Self)
+                                     <i class="fas fa-info-circle" data-tooltip="Additional deduction for NPS self-contribution. Max: ₹50,000 (Old Regime Only)"></i>
+                                 </label>
+                                 <input type="number" id="deduction-nps-80ccd1b" placeholder="Max 50,000" min="0" max="50000" step="1000" value="0" disabled>
+                                 <div class="error-message" id="deduction-nps-80ccd1b-error" role="alert"></div>
+                            </div>
+
+                            <!-- Standard Deduction Note (Now applicable to both, just display info) -->
+                            <div class="form-group deduction-info" id="fg-std-deduction-info">
+                                 <p style="font-size: 0.9rem; color: var(--secondary-color); padding: 0.8rem 1rem; background: var(--highlight-bg); border-radius: 4px; border-left: 3px solid var(--info-color);">
+                                    <i class="fas fa-info-circle"></i> A Standard Deduction of ₹50,000 is available under <strong>both</strong> Old and New Regimes (if Salary Income exists and is positive). It's automatically applied in the calculation.
+                                 </p>
+                             </div>
+
+                        </div>
+                    </div>
+                 </form>
+            </section>
+
+            <!-- Results Section Column -->
+             <section class="card" id="results-section">
+                 <h2><i class="fas fa-chart-line"></i> Tax Calculation Summary</h2>
+
+                <!-- Placeholder message initially -->
+                 <div id="initial-message" class="text-center mt-2">
+                     <p>Enter your income details and choose a tax regime on the left to calculate your tax.</p>
+                 </div>
+
+                <!-- Actual results container (hidden initially) -->
+                 <div id="results-output" class="hidden"> {/* Start hidden */}
+
+                    {/* Key Summary Figures */}
+                     <div class="results-summary" id="res-summary-wrapper">
+                         <div class="summary-item taxable-income-item" id="res-taxable-income">
+                             <p>Net Taxable Income</p>
+                            <span class="result-value" data-value="0">₹ 0</span>
+                         </div>
+                        <div class="summary-item tax-payable-item" id="res-total-tax">
+                             <p>Total Tax Payable</p>
+                             <span class="result-value" data-value="0">₹ 0</span>
+                        </div>
+                         <div class="summary-item take-home-item" id="res-net-income">
+                            <p>Net Annual Pay (Post Tax)</p>
+                            <span class="result-value" data-value="0">₹ 0</span>
+                        </div>
+                         <div class="summary-item take-home-item" id="res-net-income-monthly">
+                            <p>Net Monthly Pay (Post Tax)</p>
+                             <span class="result-value" data-value="0">₹ 0</span>
+                         </div>
+                    </div>
+
+                    <!-- Comparison Note (Dynamically generated) -->
+                    <div class="comparison-note" id="comparison-note" style="display: none;">
+                         <!-- Content generated by JS -->
+                    </div>
+
+
+                    <!-- Detailed Annual Breakdown Table -->
+                    <div class="breakdown-container">
+                        <h3><i class="fas fa-list-ul"></i> Annual Breakdown</h3>
+                        <table class="breakdown-table" id="res-breakdown-table">
+                            <tbody>
+                                <tr id="row-gross-income"><th>Gross Total Income</th><td data-value="0">₹ 0</td></tr>
+                                 <tr id="row-std-deduction"><th>(-) Standard Deduction</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-hra-deduction"><th>(-) HRA Exemption</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-80c-deduction"><th>(-) Section 80C</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-80d-deduction"><th>(-) Section 80D</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-80e-deduction"><th>(-) Section 80E</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-nps-deduction"><th>(-) Sec 80CCD(1B)</th><td data-value="0">₹ 0</td></tr>
+                                 <tr id="row-total-deductions" class="highlight-row"><th>Total Deductions & Exemptions</th><td data-value="0">₹ 0</td></tr>
+                                 <tr id="row-net-taxable-income" class="highlight-row"><th>(=) Net Taxable Income</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-income-tax"><th>Income Tax (Before Rebate)</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-rebate"><th>(-) Rebate u/s 87A</th><td data-value="0">(-) ₹ 0</td></tr>
+                                 <tr id="row-tax-after-rebate"><th>Tax After Rebate</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-cess"><th>(+) Health & Edu Cess (4%)</th><td data-value="0">₹ 0</td></tr>
+                                <tr id="row-total-tax-payable" class="highlight-row total-tax-row"><th>(=) Total Tax Payable</th><td data-value="0">₹ 0</td></tr>
+                            </tbody>
+                        </table>
+                     </div>
+
+                     <!-- Tax Optimization Suggestions -->
+                     <div class="optimization-suggestions" id="optimization-suggestions">
+                        <h3><i class="fas fa-lightbulb"></i> Tax Optimization Suggestions</h3>
+                        <ul id="suggestions-list">
+                            <li class="placeholder-suggestion">Suggestions will appear here after calculation.</li>
+                         </ul>
+                    </div>
+
+                    <!-- Charts Area -->
+                     <div class="charts-container" id="chart-area">
+                        <div class="chart-wrapper" id="wrapper-comparison-chart">
+                            <h4><i class="fas fa-balance-scale-right"></i> Old vs New Regime Tax</h4>
+                            <canvas id="comparisonChart" role="img" aria-label="Bar chart comparing tax in Old vs New regime"></canvas>
+                         </div>
+                         <div class="chart-wrapper" id="wrapper-income-breakdown-chart">
+                             <h4><i class="fas fa-chart-pie"></i> Income Breakdown (Annual)</h4>
+                            <canvas id="incomeBreakdownChart" role="img" aria-label="Doughnut chart showing income split: Take-Home, Tax, Deductions"></canvas>
+                        </div>
+                        <div class="chart-wrapper" id="wrapper-tax-components-chart">
+                             <h4><i class="fas fa-percentage"></i> Tax Components</h4>
+                            <canvas id="taxComponentsChart" role="img" aria-label="Pie chart showing tax components: Base Tax and Cess"></canvas>
+                        </div>
+                     </div>
+
+                     <!-- Download PDF Button -->
+                     <div class="download-button-container">
+                         <button id="download-pdf" class="btn-download" disabled>
+                             <i class="fas fa-file-pdf"></i> Download PDF Report
+                        </button>
+                     </div>
+
+                </div> <!-- End #results-output -->
+             </section>
+        </main>
+
+        <footer>
+            <p>Built with <i class="fas fa-heart"></i> for educational purposes. Hosted on GitHub Pages.</p>
+            <p class="disclaimer">
+                <strong>Disclaimer:</strong> This calculator provides estimates based on AY 2024-25 (FY 2023-24) rules and the data entered. It does not account for all possible income sources, deductions, or complexities (like surcharge for high income >₹50L, detailed capital gains rules, agricultural income etc.). Tax laws can change. Always consult with a qualified tax professional for personalized financial advice.
+            </p>
+             <p>
+                <!-- IMPORTANT: Update this link to your actual GitHub repo -->
+                <a href="https://github.com/YOUR_USERNAME/YOUR_REPO_NAME" target="_blank" rel="noopener noreferrer">
+                     <i class="fab fa-github"></i> View Source on GitHub
+                 </a>
+             </p>
+             <!-- Update with your name or project name -->
+             <p>&copy; <span id="current-year"></span> Your Name / Project Name. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        /* ========================== */
+        /* == JavaScript Logic       == */
+        /* ========================== */
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Global Constants & State ---
+            const CURRENT_AY = "2024-25";
+            const CURRENT_FY = "2023-24";
+            const STD_DEDUCTION_AMOUNT = 50000;
+            const NEW_REGIME_REBATE_LIMIT = 700000; // NTI Limit for full rebate
+            const OLD_REGIME_REBATE_LIMIT = 500000; // NTI Limit for rebate eligibility
+            const OLD_REGIME_REBATE_MAX_AMOUNT = 12500; // Max rebate amount
+            const MAX_80C_LIMIT = 150000;
+            const MAX_80CCD1B_LIMIT = 50000;
+            const CESS_RATE = 0.04;
+
+            let taxData = {}; // Stores final calculated results for UI/PDF
+            let charts = {}; // Stores Chart.js instances
+            let isDarkMode = false;
+            let calculationTimeout; // For debouncing input
+
+             // --- Utility Functions ---
+            const qs = (selector) => document.querySelector(selector);
+            const qsa = (selector) => document.querySelectorAll(selector);
+            const formatCurrency = (value, hideZero = false) => {
+                 const numValue = Number(value); // Ensure it's a number
+                 if (isNaN(numValue)) return '₹ N/A'; // Handle invalid numbers gracefully
+                 if (hideZero && numValue === 0) return "₹ -";
+                 const roundedValue = Math.round(numValue);
+                 if (roundedValue < 0) {
+                    return `(-) ₹ ${Math.abs(roundedValue).toLocaleString('en-IN')}`;
+                 }
+                 return `₹ ${roundedValue.toLocaleString('en-IN')}`;
+             };
+
+            // --- DOM Element References ---
+            const form = qs('#tax-form');
+            const grossSalaryInput = qs('#gross-salary');
+            const otherIncomeInput = qs('#other-income');
+            const regimeNewRadio = qs('#regime-new');
+            const regimeOldRadio = qs('#regime-old');
+            const claimHraSelect = qs('#claim-hra');
+            const hraDetailsDiv = qs('#hra-details');
+            const basicSalaryHraInput = qs('#basic-salary-hra');
+            const hraReceivedInput = qs('#hra-received');
+            const rentPaidInput = qs('#rent-paid');
+            const metroCitySelect = qs('#metro-city');
+            const deduction80CInput = qs('#deduction-80c');
+            const deduction80DInput = qs('#deduction-80d');
+            const deduction80EInput = qs('#deduction-80e');
+            const deductionNpsInput = qs('#deduction-nps-80ccd1b');
+            const deductionsWrapper = qs('#deductions-wrapper');
+            const deductionsSection = qs('#deductions-section'); // Container for inputs
+            const deductionGroups = qsa('#deductions-section .deduction-group'); // Select groups to disable/enable easily
+            const deductionRegimeNote = qs('#deduction-regime-note');
+            const resultsOutput = qs('#results-output');
+            const initialMessage = qs('#initial-message');
+            const downloadPdfButton = qs('#download-pdf');
+            const suggestionsList = qs('#suggestions-list');
+            const comparisonNoteDiv = qs('#comparison-note');
+
+            // Result Display Elements
+            const resTaxableIncomeSpan = qs('#res-taxable-income .result-value');
+            const resTotalTaxSpan = qs('#res-total-tax .result-value');
+            const resNetIncomeSpan = qs('#res-net-income .result-value');
+            const resNetIncomeMonthlySpan = qs('#res-net-income-monthly .result-value');
+            // Table Data Cells & Rows
+            const tableRows = {
+                stdDeduction: qs('#row-std-deduction'),
+                hraDeduction: qs('#row-hra-deduction'),
+                c80cDeduction: qs('#row-80c-deduction'),
+                c80dDeduction: qs('#row-80d-deduction'),
+                c80eDeduction: qs('#row-80e-deduction'),
+                npsDeduction: qs('#row-nps-deduction'),
+                rebate: qs('#row-rebate')
+            }
+             const tableCells = {
+                grossIncome: qs('#row-gross-income td'),
+                stdDeduction: qs('#row-std-deduction td'),
+                hraDeduction: qs('#row-hra-deduction td'),
+                c80cDeduction: qs('#row-80c-deduction td'),
+                 c80dDeduction: qs('#row-80d-deduction td'),
+                 c80eDeduction: qs('#row-80e-deduction td'),
+                npsDeduction: qs('#row-nps-deduction td'),
+                totalDeductions: qs('#row-total-deductions td'),
+                 netTaxableIncome: qs('#row-net-taxable-income td'),
+                incomeTax: qs('#row-income-tax td'),
+                rebate: qs('#row-rebate td'),
+                taxAfterRebate: qs('#row-tax-after-rebate td'),
+                cess: qs('#row-cess td'),
+                totalTaxPayable: qs('#row-total-tax-payable td')
+             };
+
+             // Chart Canvases
+             const comparisonChartCtx = qs('#comparisonChart').getContext('2d');
+             const incomeBreakdownChartCtx = qs('#incomeBreakdownChart').getContext('2d');
+             const taxComponentsChartCtx = qs('#taxComponentsChart').getContext('2d');
+
+             // Theme Toggle Elements
+             const themeToggle = qs('#theme-toggle-checkbox');
+             const themeLabel = qs('#theme-label');
+             const body = document.body;
+             const htmlEl = document.documentElement;
+
+            // --- Theme Handling ---
+             const applyTheme = (theme, isInitial = false) => {
+                 isDarkMode = theme === 'dark';
+                 htmlEl.classList.toggle('dark-mode', isDarkMode); // Apply class to HTML for global var access
+                 themeLabel.textContent = isDarkMode ? 'Dark Mode' : 'Light Mode';
+                 themeToggle.checked = isDarkMode;
+
+                 // Only store if not initial load (respect user's saved preference)
+                 if (!isInitial) {
+                     localStorage.setItem('theme', theme);
+                 }
+
+                 // Update Chart themes (defer if initial load, charts might not exist yet)
+                 if (Object.keys(charts).length > 0) {
+                    updateChartThemes();
+                 }
+             };
+
+             const toggleTheme = () => {
+                const newTheme = isDarkMode ? 'light' : 'dark';
+                // GSAP cross-fade (or just instant change for simplicity)
+                gsap.to("body", { // Target body for visual background transition
+                     backgroundColor: `var(--bg-color-${newTheme})`, // Access the specific theme variable
+                    duration: 0.1, // Quick fade
+                     onComplete: () => { // Apply class and logic AFTER visual change starts
+                         applyTheme(newTheme);
+                    }
+                 });
+                // Animate slider handle quickly
+                gsap.fromTo(themeToggle.nextElementSibling.querySelector('.slider:before'),
+                    { scale: 1 },
+                    { scale: 1.15, yoyo: true, repeat: 1, duration: 0.2, ease: 'power2.inOut' }
+                );
+            };
+
+             // Load theme on start
+             const savedTheme = localStorage.getItem('theme');
+             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+             const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+             applyTheme(initialTheme, true); // Apply instantly on load
+
+             themeToggle.addEventListener('change', toggleTheme);
+
+
+            // --- Input Validation & Error Handling ---
+            const showError = (inputId, message) => {
+                const inputElement = qs(`#${inputId}`);
+                 const errorElement = qs(`#${inputId}-error`);
+                 if (!inputElement || !errorElement) return; // Element might not exist/be relevant
+
+                inputElement.classList.add('error-input');
+                inputElement.setAttribute('aria-invalid', 'true');
+                inputElement.setAttribute('aria-describedby', `${inputId}-error`);
+
+                gsap.killTweensOf(inputElement); // Stop any previous animation
+                 gsap.fromTo(inputElement, { x: 0 }, { x: "-=3", duration: 0.06, repeat: 5, yoyo: true, ease: "power1.inOut", clearProps: "x" }); // Shake [Anim 1]
+                errorElement.textContent = message;
+                if (!errorElement.classList.contains('visible')) {
+                     errorElement.classList.add('visible');
+                     gsap.fromTo(errorElement, { opacity: 0, y: -5 }, { opacity: 1, y: 0, duration: 0.3, ease: "power1.out" }); // Fade in error [Anim 2]
+                }
+
+                disableDownloadButton(); // Ensure download is disabled on error
+             };
+
+             const clearError = (inputId) => {
+                 const inputElement = qs(`#${inputId}`);
+                 const errorElement = qs(`#${inputId}-error`);
+                 if (!inputElement || !errorElement || !errorElement.classList.contains('visible')) return;
+
+                inputElement.classList.remove('error-input');
+                inputElement.setAttribute('aria-invalid', 'false');
+                inputElement.removeAttribute('aria-describedby');
+                 // Animation fade out error [Anim 4]
+                 gsap.to(errorElement, {
+                     opacity: 0, duration: 0.2, ease: "power1.in", onComplete: () => {
+                        errorElement.textContent = '';
+                         errorElement.classList.remove('visible');
+                     }
+                 });
+             };
+
+            const clearAllErrors = () => {
+                qsa('.error-message.visible').forEach(el => {
+                    const inputId = el.id.replace('-error', '');
+                    clearError(inputId);
+                });
+                qsa('.error-input').forEach(el => el.classList.remove('error-input'));
+            };
+
+             const validateNumberInput = (inputId, fieldName, isRequired, maxLimit = Infinity, minLimit = 0) => {
+                 const input = qs(`#${inputId}`);
+                 // Skip validation if the input is disabled (e.g., deductions in New Regime)
+                 if (input.disabled) {
+                     return { isValid: true, value: 0 }; // Treat disabled as valid with value 0
+                 }
+
+                const valueStr = input.value.trim();
+                let value = NaN;
+
+                clearError(inputId); // Clear previous error first
+
+                 // Check required field
+                 if (isRequired && valueStr === '') {
+                    showError(inputId, `${fieldName} is required.`);
+                     return { isValid: false, value: NaN };
+                }
+                 // Allow non-required empty fields (treat as 0 later)
+                 if (!isRequired && valueStr === '') {
+                     return { isValid: true, value: 0 };
+                }
+
+                value = parseFloat(valueStr);
+
+                 // Check if valid number
+                if (isNaN(value)) {
+                    showError(inputId, `Invalid number for ${fieldName}.`);
+                    return { isValid: false, value: NaN };
+                 }
+                 // Check min limit
+                 if (value < minLimit) {
+                     showError(inputId, `${fieldName} cannot be negative.`);
+                     return { isValid: false, value: value };
+                 }
+                 // Check max limit
+                 if (value > maxLimit) {
+                    showError(inputId, `${fieldName} cannot exceed ${formatCurrency(maxLimit)}.`);
+                    // Still return the value entered, just mark as invalid
+                    return { isValid: false, value: value };
+                 }
+
+                // Valid input
+                 return { isValid: true, value: value };
+             };
+
+
+            const validateForm = () => {
+                 clearAllErrors(); // Start fresh
+                 let isFormValid = true;
+                let inputValues = {}; // Store validated values
+
+                 // Gross Salary (Required)
+                 const salaryValidation = validateNumberInput('gross-salary', 'Gross Salary', true, Infinity, 0); // Min 0
+                 if (!salaryValidation.isValid) isFormValid = false;
+                 inputValues.grossSalary = salaryValidation.value;
+
+                 // Other Income (Not required, default 0)
+                 const otherIncomeValidation = validateNumberInput('other-income', 'Other Income', false, Infinity, 0); // Min 0
+                 if (!otherIncomeValidation.isValid) isFormValid = false;
+                 inputValues.otherIncome = otherIncomeValidation.value;
+
+                // Regime & HRA Claim Info
+                 inputValues.selectedRegime = regimeNewRadio.checked ? 'new' : 'old';
+                 inputValues.claimHRA = claimHraSelect.value;
+                 inputValues.isMetro = metroCitySelect.value; // Always read metro status
+
+                // Validate Deductions ONLY if Old Regime is selected
+                if (inputValues.selectedRegime === 'old') {
+                    // HRA Details (Required only if Claim HRA is 'yes')
+                    const isHraClaimed = inputValues.claimHRA === 'yes';
+                    const hraBasicValidation = validateNumberInput('basic-salary-hra', 'Basic Salary for HRA', isHraClaimed, Infinity, 0);
+                    const hraReceivedValidation = validateNumberInput('hra-received', 'HRA Received', isHraClaimed, Infinity, 0);
+                    const hraRentPaidValidation = validateNumberInput('rent-paid', 'Rent Paid', isHraClaimed, Infinity, 0);
+
+                    if (isHraClaimed && (!hraBasicValidation.isValid || !hraReceivedValidation.isValid || !hraRentPaidValidation.isValid)) {
+                        isFormValid = false;
+                    }
+                    inputValues.basicSalaryHRA = hraBasicValidation.value;
+                    inputValues.hraReceived = hraReceivedValidation.value;
+                    inputValues.rentPaid = hraRentPaidValidation.value;
+
+                    // 80C
+                    const c80cValidation = validateNumberInput('deduction-80c', 'Section 80C', false, MAX_80C_LIMIT, 0);
+                    if (!c80cValidation.isValid) isFormValid = false;
+                    inputValues.deduction80C = c80cValidation.isValid ? c80cValidation.value : Math.min(c80cValidation.value, MAX_80C_LIMIT); // Use capped value even if invalid
+
+                    // 80D (No fixed max here in validation, just validate number >= 0)
+                    const c80dValidation = validateNumberInput('deduction-80d', 'Section 80D', false, Infinity, 0);
+                    if (!c80dValidation.isValid) isFormValid = false;
+                    inputValues.deduction80D = c80dValidation.value;
+
+                    // 80E (No max, >= 0)
+                    const c80eValidation = validateNumberInput('deduction-80e', 'Section 80E', false, Infinity, 0);
+                    if (!c80eValidation.isValid) isFormValid = false;
+                    inputValues.deduction80E = c80eValidation.value;
+
+                    // 80CCD(1B) NPS
+                    const npsValidation = validateNumberInput('deduction-nps-80ccd1b', 'Section 80CCD(1B)', false, MAX_80CCD1B_LIMIT, 0);
+                    if (!npsValidation.isValid) isFormValid = false;
+                    inputValues.deductionNps = npsValidation.isValid ? npsValidation.value : Math.min(npsValidation.value, MAX_80CCD1B_LIMIT); // Use capped value
+
+                 } else {
+                     // Set all old regime specific deductions to 0 if new regime selected
+                     inputValues.basicSalaryHRA = 0;
+                     inputValues.hraReceived = 0;
+                     inputValues.rentPaid = 0;
+                     inputValues.deduction80C = 0;
+                     inputValues.deduction80D = 0;
+                    inputValues.deduction80E = 0;
+                     inputValues.deductionNps = 0;
+                    inputValues.claimHRA = 'no'; // Force HRA claim to 'no' in new regime
+                 }
+
+                 // Enable/disable download button based on validation
+                 if (isFormValid) {
+                     enableDownloadButton();
+                 } else {
+                     disableDownloadButton();
+                     hideResults(); // Hide results if form becomes invalid
+                 }
+
+                 return { isValid: isFormValid, values: inputValues };
+             };
+
+             // --- HRA Calculation ---
+            const calculateHraExemption = (basic, hraReceived, rentPaid, isMetro) => {
+                // Ensure inputs are positive numbers for calculation
+                const validBasic = Math.max(0, Number(basic) || 0);
+                const validHraReceived = Math.max(0, Number(hraReceived) || 0);
+                const validRentPaid = Math.max(0, Number(rentPaid) || 0);
+
+                if (validBasic <= 0 || validRentPaid <= 0 || validHraReceived <= 0) {
+                    return 0; // No exemption if any essential component is zero or invalid
+                 }
+
+                const rentOver10pctBasic = Math.max(0, validRentPaid - (0.10 * validBasic));
+                 const hraLimitPct = isMetro === 'yes' ? 0.50 : 0.40;
+                 const salaryLimit = hraLimitPct * validBasic;
+
+                 // Exemption is the minimum of the three
+                 const exemption = Math.min(validHraReceived, rentOver10pctBasic, salaryLimit);
+                 return Math.max(0, exemption); // Ensure non-negative result
+             };
+
+            // --- Manage Deductions UI Based on Regime ---
+            const updateDeductionsUI = (isOldRegime) => {
+                const targetOpacity = isOldRegime ? 1 : 0.5;
+                const targetPointerEvents = isOldRegime ? 'auto' : 'none';
+
+                // Animate the wrapper opacity and disable interaction for non-applicable groups
+                gsap.to(deductionGroups, {
+                    opacity: targetOpacity,
+                    pointerEvents: targetPointerEvents,
+                    duration: 0.4,
+                    stagger: 0.05
+                });
+
+                // Specifically handle the HRA claim dropdown and its group
+                const hraGroup = qs('#fg-hra');
+                 claimHraSelect.disabled = !isOldRegime;
+                 gsap.to(hraGroup, {
+                    opacity: 1, // HRA group itself is always fully visible
+                    pointerEvents: 'auto', // Always interactable (but dropdown disabled if New)
+                    duration: 0.4
+                 });
+
+
+                 if (!isOldRegime) {
+                     claimHraSelect.value = 'no'; // Reset HRA claim if switching to New
+                    toggleHraDetailsVisibility(); // Ensure HRA details hide
+                    // Reset values and clear errors for all Old Regime specific inputs
+                     [deduction80CInput, deduction80DInput, deduction80EInput, deductionNpsInput].forEach(input => {
+                         if(input) {
+                             input.value = '0';
+                             clearError(input.id);
+                         }
+                     });
+                 }
+
+                // Enable/disable the inputs within the groups
+                deductionGroups.forEach(group => {
+                    const inputs = group.querySelectorAll('input, select');
+                    inputs.forEach(input => {
+                         // Don't disable the HRA claim select itself here, handled above
+                         if (input.id !== 'claim-hra') {
+                            input.disabled = !isOldRegime;
+                         }
+                    });
+                 });
+
+                deductionRegimeNote.textContent = isOldRegime ? '(Old Regime deductions applicable)' : '(Old Regime deductions N/A)';
+
+                // Re-run validation in case switching regime makes the form valid/invalid
+                 validateForm();
+                 toggleHraDetailsVisibility(); // Call again to ensure state is correct
+             };
+
+
+            // --- Toggle HRA Details Input Section Visibility ---
+             const toggleHraDetailsVisibility = () => {
+                 const isOldRegimeSelected = regimeOldRadio.checked;
+                 const isHraClaimed = claimHraSelect.value === 'yes';
+                 const shouldShow = isOldRegimeSelected && isHraClaimed;
+
+                if (shouldShow) {
+                    if (!hraDetailsDiv.classList.contains('visible')) {
+                        hraDetailsDiv.classList.add('visible');
+                         gsap.to(hraDetailsDiv, { maxHeight: '600px', opacity: 1, marginTop: '1rem', paddingTop: '1rem', paddingBottom: '0.5rem', duration: 0.5, ease: 'power2.out' }); // Anim Expand HRA [Anim 5]
+                         // Stagger input reveals [Anim 6, 7, 8, 9]
+                        gsap.fromTo(hraDetailsDiv.querySelectorAll('.form-group'), { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3, stagger: 0.1, delay: 0.1 });
+                     }
+                } else {
+                     if (hraDetailsDiv.classList.contains('visible')) {
+                        gsap.to(hraDetailsDiv, { // Anim Collapse HRA [Anim 10]
+                             maxHeight: 0, opacity: 0, marginTop: 0, paddingTop: 0, paddingBottom: 0, duration: 0.4, ease: 'power2.in', onComplete: () => {
+                                 hraDetailsDiv.classList.remove('visible');
+                                // Reset HRA input values and errors when hiding only if NOT in old regime or claim is No
+                                if (!isOldRegimeSelected || !isHraClaimed) {
+                                     [basicSalaryHraInput, hraReceivedInput, rentPaidInput].forEach(input => {
+                                        if(input) {
+                                            input.value = '';
+                                            clearError(input.id);
+                                        }
+                                    });
+                                 }
+                             }
+                         });
+                    }
+                 }
+            };
+
+
+            // --- Core Tax Calculation Logic ---
+            const calculateTax = (taxableIncome, regime) => {
+                 let tax = 0;
+                 let rebate = 0;
+                 let taxAfterRebate = 0;
+                 let cessAmount = 0;
+                 let totalTax = 0;
+                 const nti = Math.max(0, taxableIncome); // Ensure non-negative NTI
+
+                 if (regime === 'old') {
+                    // Old Regime Slabs (Assuming age < 60)
+                    if (nti <= 250000) { tax = 0; }
+                    else if (nti <= 500000) { tax = (nti - 250000) * 0.05; }
+                    else if (nti <= 1000000) { tax = 12500 + (nti - 500000) * 0.20; }
+                    else { tax = 112500 + (nti - 1000000) * 0.30; }
+
+                    // Rebate u/s 87A for Old Regime
+                    if (nti <= OLD_REGIME_REBATE_LIMIT) {
+                         rebate = Math.min(tax, OLD_REGIME_REBATE_MAX_AMOUNT);
+                    }
+                 } else { // New Regime (Default - AY 2024-25)
+                    if (nti <= 300000) { tax = 0; }
+                    else if (nti <= 600000) { tax = (nti - 300000) * 0.05; }
+                    else if (nti <= 900000) { tax = 15000 + (nti - 600000) * 0.10; }
+                    else if (nti <= 1200000) { tax = 45000 + (nti - 900000) * 0.15; }
+                    else if (nti <= 1500000) { tax = 90000 + (nti - 1200000) * 0.20; }
+                    else { tax = 150000 + (nti - 1500000) * 0.30; }
+
+                    // Rebate u/s 87A for New Regime (AY 2024-25 specific)
+                    if (nti <= NEW_REGIME_REBATE_LIMIT) {
+                         // Full tax liability is rebated if taxable income is up to 7 Lakhs.
+                         rebate = tax;
+                     }
+                 }
+
+                 taxAfterRebate = Math.max(0, tax - rebate);
+                 // Calculate cess on tax after rebate, round cess to nearest rupee
+                 cessAmount = Math.round(taxAfterRebate * CESS_RATE);
+                 totalTax = taxAfterRebate + cessAmount;
+
+                 return {
+                     incomeTax: tax, // Tax before rebate
+                     rebate: rebate,
+                     taxAfterRebate: taxAfterRebate,
+                     cess: cessAmount,
+                    totalTaxPayable: totalTax
+                };
+             };
+
+             // --- Main Calculation Trigger Function ---
+            const runCalculation = () => {
+                const validationResult = validateForm();
+                if (!validationResult.isValid) {
+                     // Errors shown by validateForm, ensure results are hidden
+                    hideResults();
+                     return;
+                 }
+
+                 const inputs = validationResult.values;
+                 const selectedRegime = inputs.selectedRegime;
+
+                 // Calculate Gross Total Income
+                 const grossTotalIncome = Math.max(0, (inputs.grossSalary || 0) + (inputs.otherIncome || 0));
+
+                 // --- Calculate for SELECTED regime ---
+                let currentRegimeDeductions = {
+                    standard: 0, hra: 0, c80c: 0, c80d: 0, c80e: 0, nps: 0, total: 0
+                 };
+
+                 // Standard deduction applies to both if salary exists
+                 if (inputs.grossSalary > 0) {
+                    currentRegimeDeductions.standard = STD_DEDUCTION_AMOUNT;
+                 }
+
+                 if (selectedRegime === 'old') {
+                     // Calculate HRA if claimed (inputs are validated)
+                     if (inputs.claimHRA === 'yes') {
+                         currentRegimeDeductions.hra = calculateHraExemption(
+                             inputs.basicSalaryHRA,
+                             inputs.hraReceived,
+                             inputs.rentPaid,
+                             inputs.isMetro
+                         );
+                     }
+                    // Use validated & capped deduction values
+                     currentRegimeDeductions.c80c = inputs.deduction80C;
+                     currentRegimeDeductions.c80d = inputs.deduction80D;
+                    currentRegimeDeductions.c80e = inputs.deduction80E;
+                     currentRegimeDeductions.nps = inputs.deductionNps;
+                 }
+                 // Total deductions for the selected regime
+                 currentRegimeDeductions.total = currentRegimeDeductions.standard + currentRegimeDeductions.hra +
+                                                 currentRegimeDeductions.c80c + currentRegimeDeductions.c80d +
+                                                 currentRegimeDeductions.c80e + currentRegimeDeductions.nps;
+
+                // Calculate Net Taxable Income for selected regime
+                const currentNetTaxableIncome = Math.max(0, grossTotalIncome - currentRegimeDeductions.total);
+                const currentRegimeTaxResults = calculateTax(currentNetTaxableIncome, selectedRegime);
+
+
+                 // --- Calculate for the OTHER regime for comparison ---
+                const otherRegime = selectedRegime === 'old' ? 'new' : 'old';
+                let otherRegimeDeductions = {
+                    standard: 0, hra: 0, c80c: 0, c80d: 0, c80e: 0, nps: 0, total: 0
+                };
+                let otherRegimeNetTaxable = 0;
+
+                 // Standard deduction applies if salary exists
+                 if (inputs.grossSalary > 0) {
+                     otherRegimeDeductions.standard = STD_DEDUCTION_AMOUNT;
+                 }
+
+                 if (otherRegime === 'old') {
+                    // Use the input values (even if they were disabled for New)
+                     if (inputs.claimHRA === 'yes') { // Check if user intended to claim
+                        otherRegimeDeductions.hra = calculateHraExemption(inputs.basicSalaryHRA, inputs.hraReceived, inputs.rentPaid, inputs.isMetro);
+                     }
+                     // Use potentially entered (but capped) values
+                     otherRegimeDeductions.c80c = inputs.deduction80C; // Use value from input (already capped in validateForm)
+                     otherRegimeDeductions.c80d = inputs.deduction80D;
+                     otherRegimeDeductions.c80e = inputs.deduction80E;
+                     otherRegimeDeductions.nps = inputs.deductionNps; // Use value from input (capped)
+
+                     otherRegimeDeductions.total = otherRegimeDeductions.standard + otherRegimeDeductions.hra +
+                                                   otherRegimeDeductions.c80c + otherRegimeDeductions.c80d +
+                                                   otherRegimeDeductions.c80e + otherRegimeDeductions.nps;
+                 } else { // other regime is 'new'
+                    // Only standard deduction applies
+                     otherRegimeDeductions.total = otherRegimeDeductions.standard;
+                 }
+
+                otherRegimeNetTaxable = Math.max(0, grossTotalIncome - otherRegimeDeductions.total);
+                const otherRegimeTaxResults = calculateTax(otherRegimeNetTaxable, otherRegime);
+
+
+                // Prepare `taxData` object for UI, charts, PDF
+                taxData = {
+                    selectedRegime: selectedRegime,
+                    grossTotalIncome: grossTotalIncome,
+                    grossSalary: inputs.grossSalary,
+                    otherIncome: inputs.otherIncome,
+                     // Deductions applied for the *selected* regime
+                    standardDeduction: currentRegimeDeductions.standard,
+                    hraExemption: currentRegimeDeductions.hra,
+                    deduction80C: currentRegimeDeductions.c80c,
+                    deduction80D: currentRegimeDeductions.c80d,
+                    deduction80E: currentRegimeDeductions.c80e,
+                    deductionNps: currentRegimeDeductions.nps,
+                    totalDeductions: currentRegimeDeductions.total,
+                    netTaxableIncome: currentNetTaxableIncome,
+                    // Tax results for the *selected* regime
+                    ...currentRegimeTaxResults, // incomeTax, rebate, taxAfterRebate, cess, totalTaxPayable
+                    // Calculated final income
+                    netAnnualIncome: grossTotalIncome - currentRegimeTaxResults.totalTaxPayable,
+                    netMonthlyIncome: (grossTotalIncome - currentRegimeTaxResults.totalTaxPayable) / 12,
+                    // Store comparison data
+                    otherRegime: otherRegime,
+                    otherRegimeTaxData: otherRegimeTaxResults,
+                    // Store raw inputs for suggestions/PDF context if needed
+                    rawInputs: inputs
+                };
+
+                // Update UI with results
+                 showResults(); // Animates results into view
+                 updateUIValues(); // Updates numbers and table
+                 updateCharts(); // Updates graphs
+                 generateSuggestions(); // Generates helpful tips
+                 generateComparisonNote(); // Generates comparison text
+
+            };
+
+             // --- Update UI Elements with Calculated Data ---
+            const showResults = () => {
+                if (resultsOutput.classList.contains('hidden')) {
+                    resultsOutput.classList.remove('hidden');
+                    gsap.to(initialMessage, { opacity: 0, duration: 0.2, onComplete: () => initialMessage.classList.add('hidden') }); // Hide initial msg
+
+                    // GSAP Animation: Reveal results section [Anim 13]
+                    gsap.fromTo(resultsOutput,
+                        { opacity: 0, y: 20 },
+                        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.1 }
+                     );
+
+                    // Stagger reveal of summary items [Anim 14, 15, 16, 17]
+                     gsap.fromTo(".results-summary .summary-item",
+                         { opacity: 0, scale: 0.9 },
+                         { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: "back.out(1.7)", delay: 0.2 }
+                    );
+                     // Stagger reveal table rows [Anim 18 variations x 14 rows = ~14 anims]
+                    gsap.fromTo("#res-breakdown-table tbody tr",
+                        { opacity: 0, x: -20 },
+                        { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: "power1.out", delay: 0.4 }
+                    );
+                    // Animate reveal sections below table
+                    gsap.fromTo("#comparison-note, #optimization-suggestions, #chart-area, .download-button-container",
+                        { opacity: 0, y: 15 },
+                         { opacity: 1, y: 0, duration: 0.5, stagger: 0.15, ease: "power2.out", delay: 0.6 }
+                    );
+                 }
+            };
+
+             const hideResults = () => {
+                 if (!resultsOutput.classList.contains('hidden')) {
+                     // Anim Hide Results [Anim 11]
+                     gsap.to(resultsOutput, {
+                         opacity: 0, y: 20, duration: 0.4, ease: "power2.in", onComplete: () => {
+                            resultsOutput.classList.add('hidden');
+                             initialMessage.classList.remove('hidden');
+                             gsap.fromTo(initialMessage, { opacity: 0 }, { opacity: 1, duration: 0.3 }); // Anim Show Initial [Anim 12]
+                            clearCharts();
+                            clearSuggestions();
+                             comparisonNoteDiv.style.display = 'none';
+                             disableDownloadButton();
+                        }
+                     });
+                 }
+             };
+
+
+             const updateUIValues = () => {
+                 // Counter animation function using GSAP
+                const animateCounter = (element, value) => {
+                     if (!element) return;
+                    let startValue = parseFloat(element.getAttribute('data-value')) || 0;
+                    // Use a temporary object for GSAP to tween its property
+                     let tempObj = { val: startValue };
+                     gsap.to(tempObj, {
+                         duration: 1.0,
+                         val: value,
+                         ease: "power2.out",
+                         onUpdate: function() {
+                            // Format currency on each frame update
+                            element.textContent = formatCurrency(tempObj.val);
+                        },
+                        onComplete: function() {
+                             // Ensure final display is perfectly formatted
+                            element.textContent = formatCurrency(value);
+                             element.setAttribute('data-value', value); // Store final value
+                        }
+                     });
+                };
+
+                 // Animate Summary Spans [Anim 19, 20, 21, 22]
+                animateCounter(resTaxableIncomeSpan, taxData.netTaxableIncome);
+                animateCounter(resTotalTaxSpan, taxData.totalTaxPayable);
+                 animateCounter(resNetIncomeSpan, taxData.netAnnualIncome);
+                 animateCounter(resNetIncomeMonthlySpan, taxData.netMonthlyIncome);
+
+                 // Update Breakdown Table (using direct update for simplicity now, but can animate)
+                const updateCell = (cellElement, value, isNegative = false, hideZero = true) => {
+                    if(!cellElement) return; // Guard against null elements
+                    const numValue = Number(value) || 0;
+                    const formattedValue = formatCurrency(numValue, hideZero);
+                    const displayValue = isNegative && numValue > 0 ? `(-) ${formattedValue.replace('₹ ','')}` : formattedValue;
+
+                     cellElement.textContent = displayValue;
+                     cellElement.setAttribute('data-value', Math.round(numValue));
+
+                     // Add/Remove class for zero values
+                     const row = cellElement.closest('tr');
+                     if(row) {
+                         row.classList.toggle('zero-value', numValue === 0 && hideZero);
+                     }
+
+                     // Optional simple fade for cell update [Anim 23 implied]
+                     gsap.fromTo(cellElement, { opacity: 0.7 }, { opacity: 1, duration: 0.3 });
+                 };
+
+                 updateCell(tableCells.grossIncome, taxData.grossTotalIncome, false, false); // Don't hide zero GTI
+                updateCell(tableCells.stdDeduction, taxData.standardDeduction);
+                 updateCell(tableCells.hraDeduction, taxData.hraExemption);
+                updateCell(tableCells.c80cDeduction, taxData.deduction80C);
+                 updateCell(tableCells.c80dDeduction, taxData.deduction80D);
+                updateCell(tableCells.c80eDeduction, taxData.deduction80E);
+                 updateCell(tableCells.npsDeduction, taxData.deductionNps);
+                updateCell(tableCells.totalDeductions, taxData.totalDeductions);
+                updateCell(tableCells.netTaxableIncome, taxData.netTaxableIncome, false, false); // Show zero NTI if applicable
+                 updateCell(tableCells.incomeTax, taxData.incomeTax);
+                 updateCell(tableCells.rebate, taxData.rebate, true); // Show as negative
+                updateCell(tableCells.taxAfterRebate, taxData.taxAfterRebate);
+                 updateCell(tableCells.cess, taxData.cess);
+                updateCell(tableCells.totalTaxPayable, taxData.totalTaxPayable, false, false); // Final tax, show zero if it is
+
+                 // Show/Hide rows based on zero values for deductions
+                 Object.keys(tableRows).forEach(key => {
+                     const row = tableRows[key];
+                     const cell = tableCells[key];
+                     if (row && cell) {
+                         const value = parseFloat(cell.getAttribute('data-value')) || 0;
+                         const shouldHide = (value === 0 && key !== 'rebate' && key !== 'stdDeduction'); // Hide deduction rows if zero, but always show rebate/std ded rows
+                         // Use GSAP for smooth hide/show? Or just toggle class? Simple toggle for now.
+                         // row.style.display = shouldHide ? 'none' : ''; // Might jump layout
+                         // Better: Animate height or just dim the text (already done via .zero-value class)
+                         row.style.display = ''; // Ensure row is visible before potentially adding zero-value class
+                     }
+                 });
+             };
+
+
+            // --- Chart.js Integration ---
+            const initializeCharts = () => {
+                 Chart.defaults.font.family = 'Poppins'; // Set global font family
+
+                const defaultChartOptions = (titleText = '') => ({
+                     responsive: true,
+                     maintainAspectRatio: false,
+                     plugins: {
+                        legend: {
+                            position: 'bottom',
+                             labels: { padding: 15, usePointStyle: true, font: { size: 11 } }
+                         },
+                        title: { display: false }, // Keep titles in HTML <h4> for better control
+                         tooltip: {
+                             backgroundColor: isDarkMode ? 'rgba(50,50,50,0.9)' : 'rgba(255,255,255,0.9)',
+                             titleColor: isDarkMode ? '#eee' : '#333',
+                            bodyColor: isDarkMode ? '#ddd' : '#555',
+                            borderColor: isDarkMode ? '#666' : '#ddd',
+                            borderWidth: 1,
+                             padding: 10,
+                            boxPadding: 4,
+                            bodyFont: { family: 'Poppins' },
+                             titleFont: { family: 'Poppins', weight: 'bold' },
+                             callbacks: {
+                                 label: (context) => {
+                                     let label = context.dataset.label || context.label || '';
+                                    if (label) label += ': ';
+                                    const value = context.parsed.y ?? context.parsed; // Handle bar, pie, doughnut
+                                     if (value !== null && typeof value !== 'undefined') {
+                                        label += formatCurrency(value);
+                                     }
+                                     return label;
+                                }
+                             }
+                         }
+                    },
+                     animation: { duration: 800, easing: 'easeOutQuart' }, // Anim Chart draw [implied]
+                 });
+
+                const barChartOptions = defaultChartOptions();
+                 barChartOptions.scales = {
+                     y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: value => formatCurrency(value, true).replace('₹ ','') }, grid: { } }, // Dynamic color set in updateTheme
+                    x: { ticks: { font: { size: 11 } }, grid: { display: false } } // Dynamic color set in updateTheme
+                 };
+
+                 const doughnutPieOptions = defaultChartOptions();
+                 doughnutPieOptions.plugins.legend.position = 'right'; // Position legend differently for pies
+
+                charts.comparison = new Chart(comparisonChartCtx, { type: 'bar', data: { labels: [], datasets: [] }, options: barChartOptions });
+                charts.incomeBreakdown = new Chart(incomeBreakdownChartCtx, { type: 'doughnut', data: { labels: [], datasets: [] }, options: { ...doughnutPieOptions, cutout: '65%' } });
+                 charts.taxComponents = new Chart(taxComponentsChartCtx, { type: 'pie', data: { labels: [], datasets: [] }, options: doughnutPieOptions });
+
+                // Set initial theme colors
+                updateChartThemes();
+            };
+
+             const updateChartThemes = () => {
+                if (Object.keys(charts).length === 0) return; // Exit if no charts
+
+                const textColor = isDarkMode ? '#e0e0e0' : '#333';
+                const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+                 const secondaryColor = isDarkMode ? 'rgba(255, 255, 255, 0.6)' : 'rgba(0, 0, 0, 0.5)';
+                const tooltipBg = isDarkMode ? 'rgba(40,40,40,0.9)' : 'rgba(255,255,255,0.95)';
+                const tooltipBorder = isDarkMode ? '#777' : '#ccc';
+
+                 Object.values(charts).forEach(chart => {
+                     // Update Scales (if they exist)
+                     if (chart.options.scales?.y) {
+                        chart.options.scales.y.ticks.color = secondaryColor;
+                        chart.options.scales.y.grid.color = gridColor;
+                    }
+                     if (chart.options.scales?.x) {
+                         chart.options.scales.x.ticks.color = secondaryColor;
+                         chart.options.scales.x.grid.color = gridColor;
+                     }
+                     // Update Legend
+                    chart.options.plugins.legend.labels.color = textColor;
+                    // Update Tooltips
+                    chart.options.plugins.tooltip.backgroundColor = tooltipBg;
+                    chart.options.plugins.tooltip.titleColor = textColor;
+                     chart.options.plugins.tooltip.bodyColor = textColor;
+                     chart.options.plugins.tooltip.borderColor = tooltipBorder;
+
+                    // Redraw chart with new colors (without data animation)
+                    chart.update('none');
+                 });
+             };
+
+
+            const updateCharts = () => {
+                 if (!taxData || typeof taxData.grossTotalIncome === 'undefined' || Object.keys(charts).length === 0) {
+                    clearCharts(); return;
+                 }
+
+                // Get current and other regime tax amounts
+                const currentTax = taxData.totalTaxPayable;
+                const otherTax = taxData.otherRegimeTaxData.totalTaxPayable;
+                 const currentLabel = taxData.selectedRegime === 'old' ? 'Old Regime' : 'New Regime';
+                 const otherLabel = taxData.otherRegime === 'old' ? 'Old Regime' : 'New Regime';
+
+                // --- Comparison Chart (Bar) ---
+                 let barLabels = ['New Regime', 'Old Regime']; // Consistent order
+                 let barData = taxData.selectedRegime === 'new' ? [currentTax, otherTax] : [otherTax, currentTax];
+                 const comparisonBg = [
+                    `rgba(var(--primary-color-rgb), 0.7)`, // New Regime color (usually blueish)
+                    `rgba(var(--warning-color-rgb), 0.7)`  // Old Regime color (usually yellowish/orangeish)
+                 ];
+                 const comparisonBorder = [
+                    `rgb(var(--primary-color-rgb))`,
+                     `rgb(var(--warning-color-rgb))`
+                 ];
+
+                charts.comparison.data.labels = barLabels;
+                charts.comparison.data.datasets = [{
+                     label: 'Total Tax Payable', // Single label for the dataset
+                     data: barData,
+                    backgroundColor: comparisonBg,
+                    borderColor: comparisonBorder,
+                     borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.6, // Adjust bar thickness
+                    categoryPercentage: 0.7 // Adjust spacing between categories
+                }];
+                 charts.comparison.update();
+                 gsap.from(charts.comparison.canvas, { duration: 0.5, scaleY: 0.8, opacity: 0.5, ease: 'back.out(1.5)', delay: 0.1 }); // Anim Chart Update [Anim 26]
+
+
+                // --- Income Breakdown Chart (Doughnut) ---
+                 const takeHome = Math.max(0, taxData.netAnnualIncome);
+                 const totalTaxBreakdown = taxData.totalTaxPayable;
+                 // Show total deductions (positive value) in the breakdown
+                 const deductionsDisplay = taxData.totalDeductions;
+                 const grossIncome = taxData.grossTotalIncome;
+
+                 const breakdownData = [];
+                 const breakdownLabels = [];
+                 const breakdownColors = [];
+
+                 if (grossIncome > 0) { // Only show breakdown if there's income
+                     if (takeHome > 0 || grossIncome === 0) { breakdownData.push(takeHome); breakdownLabels.push('Net Take-Home'); breakdownColors.push(`rgba(var(--success-color-rgb), 0.8)`); }
+                     if (totalTaxBreakdown > 0) { breakdownData.push(totalTaxBreakdown); breakdownLabels.push('Total Tax'); breakdownColors.push(`rgba(var(--error-color-rgb), 0.8)`); }
+                     if (deductionsDisplay > 0) { breakdownData.push(deductionsDisplay); breakdownLabels.push('Deductions/Exemptions'); breakdownColors.push(`rgba(var(--secondary-color-rgb), 0.7)`); }
+
+                     // Ensure sum roughly matches gross income (adjust last element for rounding)
+                     let currentSum = breakdownData.reduce((a, b) => a + b, 0);
+                     if (breakdownData.length > 0 && Math.abs(currentSum - grossIncome) > 1) {
+                         let diff = grossIncome - currentSum;
+                         breakdownData[breakdownData.length - 1] += diff;
+                     }
+                     // Filter out zero/negative values that might occur due to rounding adjustment
+                     const filteredData = [];
+                     const filteredLabels = [];
+                     const filteredColors = [];
+                     for(let i = 0; i < breakdownData.length; i++) {
+                         if (breakdownData[i] > 0) {
+                            filteredData.push(breakdownData[i]);
+                            filteredLabels.push(breakdownLabels[i]);
+                            filteredColors.push(breakdownColors[i]);
+                         }
+                     }
+
+                     charts.incomeBreakdown.data.labels = filteredLabels;
+                     charts.incomeBreakdown.data.datasets = [{
+                        data: filteredData,
+                        backgroundColor: filteredColors,
+                        borderColor: isDarkMode ? 'var(--card-bg-dark)' : 'var(--card-bg-light)', // Match card bg for border effect
+                        borderWidth: 2,
+                        hoverOffset: 8
+                    }];
+                 } else {
+                     // Handle zero income case
+                     charts.incomeBreakdown.data.labels = ['No Income'];
+                     charts.incomeBreakdown.data.datasets = [{ data: [1], backgroundColor: ['rgba(var(--secondary-color-rgb), 0.5)'], borderWidth: 0 }];
+                 }
+                 charts.incomeBreakdown.update();
+                 gsap.from(charts.incomeBreakdown.canvas, { duration: 0.7, rotation: -90, opacity: 0.5, ease: 'power2.out', delay: 0.15 }); // Anim Chart Update [Anim 27]
+
+
+                 // --- Tax Components Chart (Pie) ---
+                const baseTax = taxData.taxAfterRebate;
+                 const cess = taxData.cess;
+                 const componentsWrapper = qs('#wrapper-tax-components-chart');
+
+                if (taxData.totalTaxPayable > 0) { // Only show if there's tax
+                     componentsWrapper.style.display = ''; // Ensure wrapper is visible
+                     const pieData = [];
+                    const pieLabels = [];
+                    const pieColors = [];
+                    if(baseTax > 0) { pieData.push(baseTax); pieLabels.push('Tax Before Cess'); pieColors.push(`rgba(var(--warning-color-rgb), 0.8)`); } // Orange/Yellow
+                     if(cess > 0) { pieData.push(cess); pieLabels.push('Health & Edu Cess (4%)'); pieColors.push(`rgba(var(--secondary-color-rgb), 0.7)`); } // Grey
+
+                     charts.taxComponents.data.labels = pieLabels;
+                     charts.taxComponents.data.datasets = [{
+                         data: pieData,
+                         backgroundColor: pieColors,
+                        borderColor: isDarkMode ? 'var(--card-bg-dark)' : 'var(--card-bg-light)',
+                        borderWidth: 2,
+                        hoverOffset: 6
+                    }];
+                     charts.taxComponents.update();
+                     // Ensure wrapper is visible and animate chart [Anim 28]
+                     gsap.to(componentsWrapper, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.2)' });
+                     gsap.from(charts.taxComponents.canvas, { duration: 0.6, scale: 0.8, opacity: 0.5, ease: 'expo.out', delay: 0.2 });
+                } else {
+                     // Hide chart smoothly if tax is zero
+                    gsap.to(componentsWrapper, { // Anim Hide Chart [Implied variation]
+                         opacity: 0, scale: 0.9, duration: 0.4, onComplete: () => {
+                             // componentsWrapper.style.display = 'none'; // Let GSAP handle opacity/scale, no need to display:none
+                             charts.taxComponents.data.labels = [];
+                             charts.taxComponents.data.datasets = [];
+                             charts.taxComponents.update();
+                         }
+                     });
+                }
+
+             };
+
+
+            const clearCharts = () => {
+                 Object.values(charts).forEach(chart => {
+                    chart.data.labels = [];
+                     chart.data.datasets = [];
+                     chart.update('none'); // Update without animation
+                 });
+                 // Optional: hide wrappers smoothly
+                 qsa('.chart-wrapper').forEach(wrapper => {
+                     // Reset display style that might have been set to 'none'
+                     wrapper.style.display = '';
+                     gsap.to(wrapper, { opacity: 0, scale: 0.9, duration: 0.3 }); // Anim Hide Chart wrappers [Anim 30 implied]
+                });
+            };
+
+            // --- Tax Optimization Suggestions ---
+             const generateSuggestions = () => {
+                suggestionsList.innerHTML = ''; // Clear previous
+                 let suggestionsAdded = 0;
+                if (!taxData || typeof taxData.grossTotalIncome === 'undefined' || !validateForm().isValid) {
+                    suggestionsList.innerHTML = '<li class="placeholder-suggestion">Enter valid details to get suggestions.</li>';
+                     return;
+                }
+
+                 const addSuggestion = (text, type = 'info') => { // Types: 'info', 'good'
+                    const li = document.createElement('li');
+                    li.innerHTML = text; // Use innerHTML to allow <strong> tags
+                    li.classList.add(type === 'good' ? 'suggestion-good' : 'suggestion-info');
+                    suggestionsList.appendChild(li);
+                    suggestionsAdded++;
+                    // Anim suggestion fade-in [Anim 31 - repeated]
+                     gsap.fromTo(li, { opacity: 0, x: -15 }, { opacity: 1, x: 0, duration: 0.4, ease: "power1.out", delay: suggestionsAdded * 0.08 });
+                 };
+
+                 const currentTax = taxData.totalTaxPayable;
+                const otherTax = taxData.otherRegimeTaxData.totalTaxPayable;
+                const currentRegime = taxData.selectedRegime;
+                const otherRegime = taxData.otherRegime;
+                const currentLabel = currentRegime === 'old' ? 'Old' : 'New';
+                const otherLabel = otherRegime === 'old' ? 'Old' : 'New';
+                const rawInputs = taxData.rawInputs;
+
+
+                 // 1. Regime Comparison Suggestion
+                 const taxDifference = otherTax - currentTax; // Positive means current is better
+                 if (Math.abs(taxDifference) < 500) { // Threshold for "similar" tax
+                     addSuggestion(`Tax under both ${currentLabel} (${formatCurrency(currentTax)}) and ${otherLabel} (${formatCurrency(otherTax)}) Regimes is very similar. Choose based on deduction flexibility and investment habits.`, 'info');
+                 } else if (taxDifference > 0) {
+                    addSuggestion(`The selected <strong>${currentLabel} Regime</strong> seems beneficial, saving ~<strong>${formatCurrency(taxDifference)}</strong> compared to the ${otherLabel} Regime (${formatCurrency(otherTax)}).`, 'good');
+                 } else { // currentTax > otherTax
+                     addSuggestion(`Consider the <strong>${otherLabel} Regime</strong>. It could potentially save you ~<strong>${formatCurrency(Math.abs(taxDifference))}</strong> in taxes (Tax: ${formatCurrency(otherTax)}) compared to the current ${currentLabel} Regime (${formatCurrency(currentTax)}).`, 'info');
+                }
+
+                 // 2. Old Regime Deduction Suggestions (Show if Old Regime is selected OR if Old Regime was calculated as potentially better)
+                 if (currentRegime === 'old' || (taxDifference < 0 && otherRegime === 'old')) {
+                    let isOldRegimeContext = true; // Flag to indicate suggestions are for Old regime
+
+                     // 80C Suggestion
+                     const current80C = currentRegime === 'old' ? taxData.deduction80C : rawInputs.deduction80C; // Use correct 80C value based on context
+                     if (current80C < MAX_80C_LIMIT) {
+                         const remaining80C = MAX_80C_LIMIT - current80C;
+                        addSuggestion(`Under Old Regime: Maximize <strong>Section 80C</strong> by investing ~${formatCurrency(remaining80C)} more (up to ₹1.5 Lakh total) in options like EPF, PPF, ELSS, Term Life Premium, Home Loan Principal, etc.`, 'info');
+                     } else if (isOldRegimeContext){
+                         addSuggestion(`Old Regime: You've fully utilized the ₹1.5 Lakh limit under Section 80C.`, 'good');
+                     }
+
+                     // 80CCD(1B) NPS Suggestion
+                     const currentNPS = currentRegime === 'old' ? taxData.deductionNps : rawInputs.deductionNps;
+                     if (currentNPS < MAX_80CCD1B_LIMIT) {
+                        const remainingNps = MAX_80CCD1B_LIMIT - currentNPS;
+                         addSuggestion(`Under Old Regime: Consider additional ₹50k deduction via <strong>Section 80CCD(1B)</strong> by investing ~${formatCurrency(remainingNps)} more in NPS (Tier 1).`, 'info');
+                     } else if (isOldRegimeContext) {
+                         addSuggestion(`Old Regime: You've utilized the additional ₹50k NPS deduction under Sec 80CCD(1B).`, 'good');
+                     }
+
+                    // 80D Suggestion
+                     const current80D = currentRegime === 'old' ? taxData.deduction80D : rawInputs.deduction80D;
+                     if (current80D === 0 && isOldRegimeContext) {
+                        addSuggestion(`Under Old Regime: Explore tax savings on Health Insurance premiums via <strong>Section 80D</strong>. Limits depend on age (Self/Family: ₹25k/₹50k, Parents: additional ₹25k/₹50k).`, 'info');
+                    }
+
+                    // HRA Suggestion
+                     const currentHRAExemption = taxData.hraExemption; // HRA is only calculated if Old is selected
+                    const claimedHRA = rawInputs.claimHRA === 'yes';
+                    const rentPaidValue = rawInputs.rentPaid;
+
+                     if (currentRegime === 'old') { // Only give specific HRA advice if Old regime is active
+                        if (claimedHRA && currentHRAExemption > 0) {
+                            addSuggestion(`Old Regime: HRA exemption of ${formatCurrency(currentHRAExemption)} applied based on your inputs.`, 'good');
+                        } else if (claimedHRA && currentHRAExemption === 0 && rentPaidValue > 0) {
+                             addSuggestion(`Old Regime: HRA exemption is calculated as zero. Ensure Basic Salary, HRA Received, and Rent Paid details are correctly entered and meet the HRA rules.`, 'info');
+                         } else if (!claimedHRA && rentPaidValue > 0) {
+                             addSuggestion(`Under Old Regime: If you pay rent & receive HRA, selecting 'Yes' for Claim HRA and filling details could potentially reduce tax.`, 'info');
+                         }
+                     } else if (taxDifference < 0 && otherRegime === 'old' && rentPaidValue > 0) { // If New is selected but Old might be better due to HRA potential
+                          addSuggestion(`Potential under Old Regime: If you pay rent & receive HRA, claiming it could further increase savings if switching to Old Regime.`, 'info');
+                      }
+                 } else if (currentRegime === 'new' && taxDifference > 0) {
+                      // If New regime selected and is better
+                     addSuggestion(`The New Regime is often simpler with lower rates but fewer deductions. Standard Deduction is included.`, 'good');
+                 }
+
+
+                 // 3. Standard Deduction Info (Always relevant if salary income exists)
+                if (taxData.standardDeduction > 0) {
+                     addSuggestion(`Standard Deduction of ${formatCurrency(taxData.standardDeduction)} is applied (available in both regimes for salary income).`, 'good');
+                 }
+
+
+                 // Fallback if no specific suggestions generated
+                 if (suggestionsAdded === 0) {
+                     addSuggestion("Calculation complete. Review the breakdown and charts for details.", 'good');
+                 }
+             };
+
+
+            const clearSuggestions = () => {
+                suggestionsList.innerHTML = '<li class="placeholder-suggestion">Suggestions will appear here.</li>';
+                // Ensure the container itself is reset visually if needed
+                 gsap.set(qs('#optimization-suggestions'), { opacity: 0, scale: 0.95 });
+            };
+
+
+             // --- Comparison Note ---
+             const generateComparisonNote = () => {
+                 if (!taxData || typeof taxData.totalTaxPayable === 'undefined' || typeof taxData.otherRegimeTaxData === 'undefined') {
+                     comparisonNoteDiv.style.display = 'none';
+                     return;
+                 }
+                const currentTax = taxData.totalTaxPayable;
+                const otherTax = taxData.otherRegimeTaxData.totalTaxPayable;
+                const currentLabel = taxData.selectedRegime === 'old' ? 'Old Regime' : 'New Regime';
+                const otherLabel = taxData.otherRegime === 'old' ? 'Old Regime' : 'New Regime';
+                const difference = Math.abs(currentTax - otherTax);
+
+                let noteHTML = '';
+                 let iconClass = 'fa-info-circle';
+                 let colorVar = '--info-color'; // Default info
+                let borderVar = '--info-color';
+
+                if (difference < 500) { // Close enough
+                    iconClass = 'fa-balance-scale';
+                    colorVar = '--secondary-color';
+                    borderVar = '--secondary-color';
+                    noteHTML = `Tax under both <strong>${currentLabel}</strong> (${formatCurrency(currentTax)}) and <strong>${otherLabel}</strong> (${formatCurrency(otherTax)}) is very similar.`;
+                } else if (currentTax < otherTax) {
+                    iconClass = 'fa-check-circle';
+                     colorVar = '--success-color';
+                     borderVar = '--success-color';
+                     noteHTML = `The selected <strong>${currentLabel}</strong> (${formatCurrency(currentTax)}) appears more beneficial, saving approximately <strong>${formatCurrency(difference)}</strong> compared to the ${otherLabel} (${formatCurrency(otherTax)}).`;
+                 } else { // currentTax > otherTax
+                     iconClass = 'fa-exclamation-triangle';
+                    colorVar = '--warning-color';
+                    borderVar = '--warning-color';
+                     noteHTML = `Consider switching to the <strong>${otherLabel}</strong>. It could potentially lower your tax to ${formatCurrency(otherTax)}, saving approximately <strong>${formatCurrency(difference)}</strong> compared to the ${currentLabel} (${formatCurrency(currentTax)}).`;
+                }
+
+                 comparisonNoteDiv.innerHTML = `
+                     <h3><i class="fas ${iconClass}" style="color: var(${colorVar});"></i> Regime Comparison</h3>
+                     <p>${noteHTML}</p>`;
+                 comparisonNoteDiv.style.borderLeftColor = `var(${borderVar})`; // Use border-left-color
+                 comparisonNoteDiv.style.display = ''; // Ensure it's visible
+
+                 // Anim Fade/Scale note [Anim 33] - included in showResults() reveal sequence now
+                 // GSAP handles this via the main reveal sequence in showResults()
+             };
+
+             // --- PDF Generation (jsPDF & jsPDF-AutoTable) ---
+            const generatePDF = async () => { // Make async for potential future needs
+                if (!taxData || Object.keys(taxData).length === 0 || !validateForm().isValid) {
+                     // Use a more noticeable feedback method
+                     alert("Please ensure tax is calculated with valid inputs before generating the PDF.");
+                     // Shake the button maybe?
+                     gsap.fromTo(downloadPdfButton, { x: 0 }, { x: "-=5", duration: 0.07, repeat: 5, yoyo: true, ease: "power1.inOut", clearProps: "x" });
+                    return;
+                 }
+
+                const originalButtonContent = downloadPdfButton.innerHTML;
+                 downloadPdfButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+                downloadPdfButton.disabled = true;
+                gsap.to(downloadPdfButton, { opacity: 0.7, duration: 0.2 }); // Anim Button Busy [Anim 34]
+
+                try {
+                     // Ensure jsPDF and autoTable are loaded
+                     if (typeof window.jspdf === 'undefined' || typeof window.jspdf.jsPDF === 'undefined' || typeof window.jspdf.plugin.autotable === 'undefined') {
+                         throw new Error("jsPDF or jsPDF-AutoTable library not loaded correctly.");
+                     }
+                     const { jsPDF } = window.jspdf;
+                     const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+
+                     // --- PDF Styling and Helpers ---
+                     let yPos = 15; // Top margin
+                     const margin = 15;
+                    const pageHeight = doc.internal.pageSize.height;
+                     const pageWidth = doc.internal.pageSize.width;
+                     const usableWidth = pageWidth - 2 * margin;
+                     const lightBlue = [23, 162, 184]; // Info color (approx)
+                     const darkBlue = [0, 86, 179]; // Darker blue for headings
+                     const black = [0, 0, 0];
+                     const grey = [100, 100, 100];
+                     const lightGrey = [240, 240, 240];
+                     const successColor = [40, 167, 69];
+                     const errorColor = [220, 53, 69];
+
+                     const addWrappedText = (text, x, y, maxWidth, options = {}) => {
+                        const fontSize = options.fontSize || doc.getFontSize();
+                        const lineHeightFactor = options.lineHeightFactor || 1.15;
+                        const textLines = doc.splitTextToSize(text, maxWidth);
+                        doc.text(textLines, x, y, options);
+                        return y + (textLines.length * lineHeightFactor * (fontSize / doc.internal.scaleFactor));
+                     };
+
+                     const addHeading = (text, y, level = 1) => {
+                         const fontSize = level === 1 ? 16 : (level === 2 ? 13 : 11);
+                         const spacingBefore = level === 1 ? 8 : 6;
+                         const spacingAfter = 5;
+                         yPos = y + spacingBefore;
+                         doc.setFontSize(fontSize);
+                         doc.setFont(undefined, 'bold');
+                         doc.setTextColor(...darkBlue);
+                         doc.text(text, margin, yPos);
+                         yPos += spacingAfter;
+                         doc.setFont(undefined, 'normal'); // Reset font
+                         doc.setTextColor(...black); // Reset color
+                         doc.setLineWidth(0.2);
+                         doc.setDrawColor(200); // Light grey line
+                         doc.line(margin, yPos, pageWidth - margin, yPos);
+                         yPos += 5; // Space after line
+                         return yPos;
+                     };
+
+                    const addLineItem = (label, value, y, options = {}) => {
+                        const labelColor = options.labelColor || grey;
+                        const valueColor = options.valueColor || black;
+                        const valueAlign = options.valueAlign || 'left';
+                        const valueX = options.valueX || margin + usableWidth / 1.8; // Position value further right
+
+                        doc.setFontSize(10);
+                        doc.setFont(undefined, options.labelStyle || 'normal');
+                        doc.setTextColor(...labelColor);
+                        doc.text(label, margin, y);
+
+                        doc.setFont(undefined, options.valueStyle || 'bold');
+                        doc.setTextColor(...valueColor);
+                        doc.text(value, valueX, y, { align: valueAlign });
+                        return y + 6; // Line height
+                     };
+
+                     const checkPageBreak = (currentY, requiredSpace) => {
+                         if (currentY + requiredSpace > pageHeight - margin) { // Check if content fits before bottom margin
+                             doc.addPage();
+                             return margin; // Return new top margin
+                         }
+                         return currentY; // Return current position if no break needed
+                     };
+
+                    // --- PDF Content ---
+                    // Page 1 Header
+                    doc.setFontSize(18); doc.setFont(undefined, 'bold'); doc.setTextColor(...darkBlue);
+                    doc.text(`Income Tax Report - AY ${CURRENT_AY}`, pageWidth / 2, yPos, { align: 'center' });
+                    yPos += 7;
+                    doc.setFontSize(10); doc.setFont(undefined, 'normal'); doc.setTextColor(...grey);
+                    doc.text(`Financial Year: ${CURRENT_FY} | Calculation for ${taxData.selectedRegime === 'old' ? 'Old Regime' : 'New Regime (Default)'}`, pageWidth / 2, yPos, { align: 'center' });
+                    yPos += 5;
+                    doc.setFontSize(8);
+                    doc.text(`Generated on: ${new Date().toLocaleString()}`, pageWidth / 2, yPos, { align: 'center' });
+                    yPos += 10;
+
+                    // -- Summary --
+                    yPos = addHeading("Calculation Summary", yPos, 2);
+                    yPos = checkPageBreak(yPos, 50); // Check space for summary block
+                    yPos = addLineItem("Gross Total Income:", formatCurrency(taxData.grossTotalIncome), yPos);
+                    yPos = addLineItem("Total Deductions & Exemptions:", formatCurrency(taxData.totalDeductions), yPos);
+                    yPos = addLineItem("Net Taxable Income:", formatCurrency(taxData.netTaxableIncome), yPos, { valueStyle: 'bold'});
+                    yPos = addLineItem("Total Tax Payable:", formatCurrency(taxData.totalTaxPayable), yPos, { valueColor: errorColor, valueStyle: 'bold' });
+                    yPos = addLineItem("Net Annual Take-Home:", formatCurrency(taxData.netAnnualIncome), yPos, { valueColor: successColor, valueStyle: 'bold' });
+                    yPos = addLineItem("Net Monthly Take-Home:", formatCurrency(taxData.netMonthlyIncome), yPos, { valueColor: successColor, valueStyle: 'bold' });
+                    yPos += 5; // Extra space after summary
+
+
+                    // -- Detailed Breakdown Table --
+                    yPos = checkPageBreak(yPos, 80); // Estimate space for table header + few rows
+                    yPos = addHeading("Annual Tax Breakdown", yPos, 2);
+
+                     const tableHead = [['Component', 'Amount (INR)']];
+                     const tableBody = [
+                         ['Gross Total Income', formatCurrency(taxData.grossTotalIncome, false)], // Row 1
+                         ['(-) Standard Deduction', formatCurrency(taxData.standardDeduction, true)], // Row 2 - Hide if zero
+                         ['(-) HRA Exemption', formatCurrency(taxData.hraExemption, true)], // Row 3 - Hide if zero
+                         ['(-) Section 80C', formatCurrency(taxData.deduction80C, true)], // Row 4 - Hide if zero
+                         ['(-) Section 80D', formatCurrency(taxData.deduction80D, true)], // Row 5 - Hide if zero
+                         ['(-) Section 80E', formatCurrency(taxData.deduction80E, true)], // Row 6 - Hide if zero
+                         ['(-) Section 80CCD(1B) NPS', formatCurrency(taxData.deductionNps, true)], // Row 7 - Hide if zero
+                         ['Total Deductions & Exemptions', formatCurrency(taxData.totalDeductions)], // Row 8 (Highlight)
+                         ['(=) Net Taxable Income', formatCurrency(taxData.netTaxableIncome, false)], // Row 9 (Highlight)
+                         ['Income Tax (Before Rebate)', formatCurrency(taxData.incomeTax)], // Row 10
+                         ['(-) Rebate u/s 87A', taxData.rebate > 0 ? `(-) ${formatCurrency(taxData.rebate).replace('₹ ','')}` : formatCurrency(0, true)], // Row 11
+                         ['Tax After Rebate', formatCurrency(taxData.taxAfterRebate)], // Row 12
+                         ['(+) Health & Edu Cess (4%)', formatCurrency(taxData.cess, true)], // Row 13
+                         ['(=) Total Tax Payable', formatCurrency(taxData.totalTaxPayable, false)], // Row 14 (Highlight)
+                     ].filter(row => !(row[1] === '₹ -')); // Filter out rows where the value is '₹ -' (hidden zero)
+
+
+                     doc.autoTable({
+                         head: tableHead,
+                         body: tableBody,
+                         startY: yPos,
+                         theme: 'grid', // 'striped', 'grid', 'plain'
+                         headStyles: { fillColor: lightBlue, textColor: 255, fontStyle: 'bold', fontSize: 10, cellPadding: 2.5 },
+                         bodyStyles: { fontSize: 9, cellPadding: 2, textColor: black, lineColor: [220, 220, 220], lineWidth: 0.1 },
+                         alternateRowStyles: { fillColor: lightGrey },
+                         columnStyles: { 1: { halign: 'right', cellWidth: 50 } }, // Right align amount column
+                         didParseCell: function(data) {
+                             // Highlight specific rows by checking the description
+                             const highlightDescriptions = ['Total Deductions & Exemptions', '(=) Net Taxable Income', '(=) Total Tax Payable'];
+                             if (data.section === 'body' && highlightDescriptions.includes(data.cell.raw)) {
+                                 data.cell.styles.fontStyle = 'bold';
+                                 data.cell.styles.fillColor = '#e9ecef'; // Use a light highlight color
+                             }
+                             // Specific styling for final tax
+                             if (data.section === 'body' && data.cell.raw === '(=) Total Tax Payable') {
+                                data.cell.styles.textColor = errorColor;
+                                data.cell.styles.fontStyle = 'bold';
+                             }
+                         },
+                         didDrawPage: function (data) {
+                             // Update yPos after table potentially adds pages
+                             yPos = data.cursor.y + 5; // Add some padding after the table
+                         }
+                     });
+
+                     // --- Suggestions (if any) ---
+                     const suggestionItems = suggestionsList.querySelectorAll('li:not(.placeholder-suggestion)');
+                     if (suggestionItems.length > 0) {
+                         yPos = checkPageBreak(yPos, 30); // Check space for suggestions heading + few lines
+                         yPos = addHeading("Tax Optimization Suggestions", yPos, 2);
+                         doc.setFontSize(9);
+                         doc.setFont(undefined, 'normal');
+                         doc.setTextColor(...grey);
+                         suggestionItems.forEach(item => {
+                             yPos = checkPageBreak(yPos, 10); // Check space per suggestion
+                             const prefix = item.classList.contains('suggestion-good') ? '✓ ' : '• ';
+                             // Remove HTML tags (like <strong>) before adding to PDF
+                             const cleanText = item.innerHTML.replace(/<[^>]*>/g, "");
+                             yPos = addWrappedText(`${prefix}${cleanText}`, margin + 2, yPos + 1, usableWidth - 4, {lineHeightFactor: 1.3, fontSize: 9});
+                             yPos += 1; // Small gap between suggestions
+                         });
+                         yPos += 5; // Space after suggestions block
+                     }
+
+                     // --- Disclaimer ---
+                     yPos = checkPageBreak(yPos, 20);
+                     doc.setFontSize(8);
+                     doc.setFont(undefined, 'italic');
+                     doc.setTextColor(...grey);
+                     const disclaimer = "Disclaimer: This is an estimated calculation based on provided inputs and standard AY 2024-25 rules. It may not cover all specific scenarios (e.g., high-income surcharge, detailed capital gains). Always consult a qualified tax professional for personalized advice.";
+                     yPos = addWrappedText(disclaimer, margin, yPos, usableWidth, {lineHeightFactor: 1.4, fontSize: 8});
+
+
+                    // --- Footer on each page ---
+                    const pageCount = doc.internal.getNumberOfPages();
+                    for (let i = 1; i <= pageCount; i++) {
+                         doc.setPage(i);
+                         doc.setFontSize(8);
+                         doc.setFont(undefined, 'normal');
+                         doc.setTextColor(...grey);
+                         doc.text(`Page ${i} of ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
+                         doc.text("Pro Indian Tax Calculator", margin, pageHeight - 10);
+                     }
+
+
+                    // --- Save ---
+                    const filename = `Income_Tax_Report_AY${CURRENT_AY}_${new Date().toISOString().slice(0,10)}.pdf`;
+                    doc.save(filename);
+
+                } catch (error) {
+                     console.error("Error generating PDF:", error);
+                     alert(`An error occurred while generating the PDF report: ${error.message}. Please check the console for details.`);
+                 } finally {
+                    // Reset button state regardless of success/error
+                     setTimeout(() => {
+                         downloadPdfButton.innerHTML = originalButtonContent;
+                         // Re-enable only if form is currently valid
+                         downloadPdfButton.disabled = !validateForm().isValid;
+                         gsap.to(downloadPdfButton, { opacity: downloadPdfButton.disabled ? 0.6 : 1, duration: 0.2 }); // Anim Restore Button [Anim 35]
+                     }, 300); // Short delay to allow user to see spinner stop
+                }
+             };
+
+
+             const enableDownloadButton = () => {
+                 if (!downloadPdfButton.disabled) return; // Already enabled
+                 downloadPdfButton.disabled = false;
+                 gsap.to(downloadPdfButton, { opacity: 1, scale: 1, cursor: 'pointer', duration: 0.3, ease: 'power1.out' }); // Anim Enable Button [Anim 36]
+             };
+
+             const disableDownloadButton = () => {
+                 if (downloadPdfButton.disabled) return; // Already disabled
+                 downloadPdfButton.disabled = true;
+                 gsap.to(downloadPdfButton, { opacity: 0.6, scale: 1, cursor: 'not-allowed', duration: 0.3, ease: 'power1.out' }); // Anim Disable Button
+            };
+
+
+             // --- Event Listeners ---
+             const handleInputChange = (event) => {
+                 clearTimeout(calculationTimeout); // Debounce: Clear previous timeout
+
+                 // If the event target is a number input, validate it immediately for feedback
+                 if (event.target.type === 'number') {
+                     validateNumberInput(event.target.id, event.target.labels[0]?.textContent || 'Field', event.target.required, parseFloat(event.target.max || Infinity), parseFloat(event.target.min || 0));
+                 }
+
+                 // Trigger full calculation after a short delay
+                 calculationTimeout = setTimeout(() => {
+                    runCalculation();
+                    // Re-validate the whole form after calculation in case cross-dependencies exist
+                    validateForm();
+                 }, 400); // Recalculate after 400ms pause
+             };
+
+             // Attach listeners to all relevant inputs/selects
+             qsa('#tax-form input[type="number"], #tax-form select').forEach(element => {
+                 element.addEventListener('input', handleInputChange); // Use 'input' for real-time feedback
+                 // Add 'change' listener as well for selects and potentially some edge cases
+                 element.addEventListener('change', handleInputChange);
+
+                // Input Focus/Blur Animations [Anim 37, 38]
+                 element.addEventListener('focus', (e) => {
+                     if (!e.target.disabled) {
+                         gsap.to(e.target.closest('.form-group'), { scale: 1.015, zIndex: 1, duration: 0.2 });
+                    }
+                 });
+                 element.addEventListener('blur', (e) => {
+                     gsap.to(e.target.closest('.form-group'), { scale: 1, zIndex: 0, duration: 0.3 });
+                     // Also re-run validation on blur for the specific field for final check
+                     if (e.target.type === 'number') {
+                        validateNumberInput(e.target.id, e.target.labels[0]?.textContent || 'Field', e.target.required, parseFloat(e.target.max || Infinity), parseFloat(e.target.min || 0));
+                     }
+                 });
+             });
+
+             // Regime radio buttons listener (triggers UI update and calculation immediately)
+             qsa('input[name="taxRegime"]').forEach(radio => {
+                 radio.addEventListener('change', (e) => {
+                     const isOld = e.target.value === 'old';
+                     // Animate slider
+                     const slider = qs('.regime-slider');
+                     gsap.to(slider, { // Anim Regime Slider [Anim 39]
+                         transform: `translateX(${isOld ? '100%' : '0%'})`, // Adjusted to 100% for full travel
+                         duration: 0.45,
+                         ease: 'elastic.out(1, 0.75)'
+                     });
+                     updateDeductionsUI(isOld);
+                     runCalculation(); // Recalculate immediately on regime change
+                 });
+             });
+
+            // HRA claim select listener (triggers visibility toggle and calculation)
+            claimHraSelect.addEventListener('change', () => {
+                 toggleHraDetailsVisibility();
+                 runCalculation(); // Recalculate if HRA claim status changes
+             });
+
+
+            downloadPdfButton.addEventListener('click', generatePDF);
+
+             // --- Initial Setup Call ---
+             const initializeApp = () => {
+                 updateDeductionsUI(regimeOldRadio.checked); // Set initial UI based on default regime (New)
+                 initializeCharts(); // Create chart instances
+                 disableDownloadButton(); // Button should start disabled
+                 qs('#current-year').textContent = new Date().getFullYear();
+                 hideResults(); // Ensure results are hidden initially
+
+                 // Initial Page Load Animations [Anim 40-47]
+                 const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+                 tl.to("#main-header", { y: 0, opacity: 1, duration: 0.6 })
+                    .to("#input-card", { scale: 1, opacity: 1, duration: 0.5 }, "-=0.3")
+                    .to("#results-section", { scale: 1, opacity: 1, duration: 0.5 }, "-=0.4") // Results card fades in, but content hidden
+                    .to(".regime-toggle-wrapper", { y: 0, opacity: 1, duration: 0.4 }, "-=0.3")
+                    .to(".income-group", { x: 0, opacity: 1, duration: 0.4, stagger: 0.1 }, "-=0.2")
+                    .to("#deductions-wrapper", { opacity: 1 }, "-=0.3") // Fade in deductions container
+                    // Stagger deduction input groups (set initial opacity based on regime)
+                    .fromTo(".form-group.deduction-group, .form-group.deduction-info, #fg-hra",
+                        { x: -15, opacity: 0 },
+                        {
+                            x: 0,
+                            opacity: (i, target) => {
+                                const isDisabled = target.querySelector(':disabled') && target.id !== 'fg-hra'; // Check if contains disabled element (excluding HRA group itself)
+                                return isDisabled ? 0.5 : 1; // Lower opacity for disabled groups
+                            },
+                            duration: 0.3,
+                            stagger: 0.05
+                        }, "-=0.2")
+                    .to("footer", { y: 0, opacity: 1, duration: 0.6 }, "+=0.2");
+
+                 // Optionally trigger a calculation if default values are valid (e.g., if salary is 0)
+                  if (validateForm().isValid) {
+                    // runCalculation(); // Decide if you want initial calculation on load if form is valid by default
+                  }
+             };
+
+            initializeApp(); // Run setup
+
+        }); // End DOMContentLoaded
+    </script>
+
+</body>
+</html>
